@@ -6,7 +6,7 @@ public class Facade
     Board board;
     DictionaryManager dictionaryManager;
 
-    public Facade(String...books)
+    public Facade()
     {
         bag= Tile.Bag.getBag();
         board=Board.getBoard();
