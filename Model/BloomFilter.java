@@ -1,4 +1,4 @@
-package test.Model;
+package Model;
 import java.util.*;
 import java.security.MessageDigest;
 import java.math.BigInteger;

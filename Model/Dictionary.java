@@ -1,4 +1,4 @@
-package test.Model;
+package Model;
 import java.io.FileReader;
 import java.util.*;
 import java.io.IOException;
@@ -6,8 +6,8 @@ import java.lang.String;
 
 public class Dictionary
 {
-    CacheManager existsCacheManager;
-    CacheManager notExistsCacheManager;
+    Model.CacheManager existsCacheManager;
+    Model.CacheManager notExistsCacheManager;
     BloomFilter bloomFilter;
     String[] files;
 

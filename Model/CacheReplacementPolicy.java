@@ -1,4 +1,4 @@
-package test.Model;
+package Model;
 
 public interface CacheReplacementPolicy
 {

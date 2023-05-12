@@ -1,4 +1,4 @@
-package test.Model;
+package Model;
 import java.util.*;
 import java.lang.String;
 
@@ -7,7 +7,7 @@ public class DictionaryManager extends Dictionary
     public HashMap<String, Dictionary> map;
     private static DictionaryManager dictionaryManager = null;
 
-    private DictionaryManager(String... args) {
+    public DictionaryManager(String... args) {
         this.map = new HashMap<>();
     }
 

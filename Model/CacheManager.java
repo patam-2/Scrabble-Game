@@ -1,11 +1,11 @@
-package test.Model;
+package Model;
 import java.util.*;
 
 public class CacheManager
 {
-	int size;
-    CacheReplacementPolicy crp;
-    HashSet<String> words;
+	public int size;
+    public CacheReplacementPolicy crp;
+    public HashSet<String> words;
 
     public CacheManager(int size, CacheReplacementPolicy crp)
     {
@@ -16,7 +16,7 @@ public class CacheManager
 
     public boolean query(String word)
     {
-        for (String s : words)
+        for (String s : this.words)
         {
             if (s.equals(word))
                 return true;
@@ -27,9 +27,9 @@ public class CacheManager
     public void add(String word)
     {
         if (size == words.size())
-            words.remove( crp.remove());
+            this.words.remove(this.crp.remove());
 
-        crp.add(word);
-        words.add(word);
+        this.crp.add(word);
+        this.words.add(word);
     }
 }

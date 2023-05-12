@@ -1,4 +1,4 @@
-package test.Model;
+package Model;
 
 import java.io.IOException;
 import java.net.ServerSocket;

@@ -1,15 +1,16 @@
-package test.Model;
+package Model;
 
 public class Facade
 {
-    Tile.Bag bag;
-    Board board;
-    DictionaryManager dictionaryManager;
+    public Board board;
+    public Tile.Bag bag;
+    public DictionaryManager dictionaryManager;
+    public MyServer myServer;
 
-    public Facade()
-    {
-        bag= Tile.Bag.getBag();
-        board=Board.getBoard();
-        dictionaryManager=DictionaryManager.get();
+    public Facade(int port, ClientHandler ch) {
+        this.bag = Tile.Bag.getBag();
+        this.board = Board.getBoard();
+        this.dictionaryManager = new DictionaryManager();
+        this.myServer = new MyServer(port, ch);
     }
 }

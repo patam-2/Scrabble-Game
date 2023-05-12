@@ -1,4 +1,4 @@
-package test.Model;
+package Model;
 import java.io.FileReader;
 import java.util.*;
 import java.io.IOException;

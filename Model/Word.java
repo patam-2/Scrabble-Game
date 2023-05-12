@@ -1,8 +1,8 @@
-package test.Model;
-
+package Model;
 
 import java.util.Arrays;
 import java.util.Objects;
+
 
 public class Word
 {
@@ -53,6 +53,18 @@ public class Word
         Word word = (Word) o;
 
         return getRow() == word.getRow() && getCol() == word.getCol() && vertical == word.vertical && Arrays.equals(tiles, word.tiles);
+    }
+
+    @Override
+    public String toString()
+    {
+        String s = null;
+
+        for (int i = 0; i < this.tiles.length; i++)
+        {
+            s += this.tiles[i];
+        }
+        return s;
     }
 
     @Override
