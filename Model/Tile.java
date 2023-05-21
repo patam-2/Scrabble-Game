@@ -55,7 +55,6 @@ public class Tile
 
         public Tile getRand()
         {
-
             char[] randLettersArray = new char[AvalTilesOp];
 
             for (int j = 0; j < tilesArry.length; j++)

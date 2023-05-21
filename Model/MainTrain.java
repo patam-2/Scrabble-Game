@@ -52,7 +52,7 @@ public class MainTrain {
 	}
 	
 	public static boolean testServer()
-	{
+	           {
 		boolean ok=true;
 		Random r=new Random();
 		int port=6000+r.nextInt(1000);

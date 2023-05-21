@@ -7,7 +7,7 @@ public class DictionaryManager extends Dictionary
     public HashMap<String, Dictionary> map;
     private static DictionaryManager dictionaryManager = null;
 
-    public DictionaryManager(String... args) {
+    private DictionaryManager(String... args) {
         this.map = new HashMap<>();
     }
 

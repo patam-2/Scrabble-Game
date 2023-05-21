@@ -60,6 +60,14 @@ public class Word
     {
         String s = null;
 
+        if (this.vertical)
+            s += "V ";
+        else
+            s += "H ";
+
+        s += String.valueOf(row)+" ";
+        s += String.valueOf(col)+" ";
+
         for (int i = 0; i < this.tiles.length; i++)
         {
             s += this.tiles[i];

@@ -1,6 +1,9 @@
 package Model;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 
 public class Board
@@ -59,8 +62,27 @@ public class Board
     }
 
 
+    public boolean dictionaryLegal(Tile[] word)
+    {
+        try {
+            PrintWriter outToServer = new PrintWriter(Host.getHost(null, 0, 0, 0).hostSocket.getOutputStream());
+            String s = null;
+            s += "Q,";
+            for (int i = 0; i < word.length; i++) {
+                s += word[i];
+            }
+            outToServer.println(s);
+        } catch (IOException e) {throw new RuntimeException(e);}
 
-    public boolean dictionaryLegal(Tile[] word) {return true;}
+        try {
+            Scanner in = new Scanner(Host.getHost(null, 0, 0, 0).hostSocket.getInputStream());
+            String input = in.next();
+            if (input.equals("true\n"))
+                return true;
+            return false;
+
+        } catch (IOException e) {throw new RuntimeException(e);}
+    }
 
 
     public String getScoreOnBoard(int row, int col) {return bonusMat[row][col];}
@@ -206,8 +228,6 @@ public class Board
         int wordRow = word.getRow();
         int wordCol = word.getCol();
         boolean isItVertical = word.getIsVertical();
-
-
 
         if (word.tiles == null)
             return false;
@@ -746,7 +766,6 @@ public class Board
 
                if (getWords(word) == null)
                    return score;
-
 
                int wordsSize = getWords(word).size();
                int i = 0;

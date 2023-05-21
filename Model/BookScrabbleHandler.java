@@ -8,14 +8,14 @@ import java.util.Scanner;
 
 public class BookScrabbleHandler implements ClientHandler
 {
-    PrintWriter out;
-    Scanner in;
+    public PrintWriter out;
+    public Scanner in;
 
     @Override
     public void handleClient(InputStream inFromclient, OutputStream outToClient)
     {
-        Scanner in = new Scanner(inFromclient);
-        PrintWriter out = new PrintWriter(outToClient);
+        in = new Scanner(inFromclient);
+        out = new PrintWriter(outToClient);
         String input = in.next();
         char question = input.charAt(0);
         input = input.substring(2);
@@ -27,7 +27,6 @@ public class BookScrabbleHandler implements ClientHandler
                 out.println("true\n");
             else
                 out.println("false\n");
-
         }
         else if(question == 'Q')
         {

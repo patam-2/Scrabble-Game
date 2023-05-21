@@ -47,8 +47,8 @@ public class MyServer {
                     }
                 }
                 catch (SocketTimeoutException e) {}
-
             }
+            System.out.println("t1");
             server.close();
         }catch (IOException e){e.printStackTrace();}
     }
