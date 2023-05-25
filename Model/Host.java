@@ -19,11 +19,12 @@ public class Host implements Player
     public InetAddress serverIp;
     public MyServer myClientServer;
     public static Host host = null;
-    public HashMap<Integer, ArrayList<Character>> playerTilesMap;
-    public ArrayList<Character> hostTiles;
+    public HashMap<Integer, ArrayList<Tile>> playerTilesMap;
+    public ArrayList<Tile> hostTiles;
     public int id;
     public int turn;
     public int rounds;
+
 
     private Host(InetAddress ip, int serverPort, int hostPort, int rounds) {
         this.id = 1;
@@ -35,22 +36,19 @@ public class Host implements Player
         this.board = Board.getBoard();
         this.hostTiles = new ArrayList<>();
         this.playerTilesMap = new HashMap<>();
+        this.numberOfClients = 1;
         for (int i = 0; i < 26; i++) {
-            this.hostTiles.add(bag.getRand().letter);
+            this.hostTiles.add(bag.getRand());
         }
         this.playerTilesMap.put(id, this.hostTiles);
         this.myClientServer = new MyServer(hostPort, new HostClientHandler());
-        try {
-            this.hostSocket = new Socket(serverIp, serverPort);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        this.myClientServer.start();
     }
 
     public static Host getHost(InetAddress ip, int serverPort, int hostPort, int rounds)
     {
         if (host == null) {
-            return new Host(ip, serverPort, hostPort, rounds);
+            host = new Host(ip, serverPort, hostPort, rounds);
         }
         return host;
     }
@@ -60,46 +58,58 @@ public class Host implements Player
     }
 
     public int placeWord(Word word) {
+        try {
+            hostSocket = new Socket(serverIp, serverPort);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         int score = this.board.tryPlaceWord(word);
 
-        for(int i = 0; i < word.tiles.length; i++) {
-            this.hostTiles.remove(word.tiles[i].letter);
-        }
-
         if (score != 0) {
+            for(int i = 0; i < word.tiles.length; i++) {
+                this.hostTiles.remove(hostTiles.indexOf(word.tiles[i]));
+            }
             for (int i = 0; i < word.tiles.length; i++) {
                 Tile t = bag.getRand();
-                this.hostTiles.add(t.letter);
+                this.hostTiles.add(t);
             }
-            this.turn = (this.turn + 1) % this.numberOfClients;
+            this.turn = 1 + (this.turn % this.numberOfClients);
+        }
+        try {
+            hostSocket.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
         return score;
     }
 
     public void closeGame() {
         this.myClientServer.close();
-        try {
-            this.hostSocket.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
         System.out.println("GAME OVER!");
     }
 
     public boolean challenge(String s) {
         try {
+            hostSocket = new Socket(serverIp, serverPort);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        try {
             PrintWriter outToServer = new PrintWriter(hostSocket.getOutputStream());
             String s1 = "";
-            s1 += "C," + s;
+            s1 += "C," +"newFile.txt," + s;
             outToServer.println(s1);
+            outToServer.flush();
         } catch (IOException e) {throw new RuntimeException(e);}
 
         try {
+            boolean flag = false;
             Scanner in = new Scanner(hostSocket.getInputStream());
-            String input = in.next();
-            if (input.equals("true\n"))
-                return true;
-            return false;
+            if (in.next().equals("true")) {
+                flag = true;
+            }
+            hostSocket.close();
+            return flag;
         } catch (IOException e) {throw new RuntimeException(e);}
     }
 }

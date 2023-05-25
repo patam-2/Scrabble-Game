@@ -43,11 +43,11 @@ public class MyServer {
                     }
                     finally {
                         aClient.close();
-                        clientHandler.close();
                     }
                 }
                 catch (SocketTimeoutException e) {}
             }
+            clientHandler.close();
             System.out.println("t1");
             server.close();
         }catch (IOException e){e.printStackTrace();}

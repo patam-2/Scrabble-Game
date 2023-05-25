@@ -1,8 +1,5 @@
 package Model;
 
-import java.awt.print.Book;
-import java.net.InetAddress;
-
 public class FacadeServer {
     public DictionaryManager dictionaryManager;
     public MyServer myServer;
@@ -13,8 +10,7 @@ public class FacadeServer {
         this.myServer.start();
     }
 
-    public void close()
-    {
+    public void close() {
         this.myServer.close();
     }
 }

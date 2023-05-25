@@ -16,26 +16,29 @@ public class BookScrabbleHandler implements ClientHandler
     {
         in = new Scanner(inFromclient);
         out = new PrintWriter(outToClient);
-        String input = in.next();
-        char question = input.charAt(0);
-        input = input.substring(2);
-        String[] newClientInputParts = input.split(",");
 
-        if (question == 'C')
+        if (in !=  null && in.hasNext())
         {
-            if (DictionaryManager.get().challenge(newClientInputParts))
-                out.println("true\n");
-            else
-                out.println("false\n");
+            String input = in.next();
+            char question = input.charAt(0);
+            input = input.substring(2);
+            String[] newClientInputParts = input.split(",");
+
+            if (question == 'C') {
+                if (DictionaryManager.get().challenge(newClientInputParts))
+                    out.println("true\n");
+                else
+                    out.println("false\n");
+
+            } else if (question == 'Q') {
+                if (DictionaryManager.get().query(newClientInputParts))
+                    out.println("true\n");
+                else
+                    out.println("false\n");
+            }
+
+            out.flush();
         }
-        else if(question == 'Q')
-        {
-            if (DictionaryManager.get().query(newClientInputParts))
-                out.println("true\n");
-            else
-                out.println("false\n");
-        }
-        out.flush();
     }
 
     @Override

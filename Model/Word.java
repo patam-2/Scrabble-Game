@@ -58,19 +58,18 @@ public class Word
     @Override
     public String toString()
     {
-        String s = null;
+        String s = "";
 
         if (this.vertical)
-            s += "V ";
+            s += "V,";
         else
-            s += "H ";
+            s += "H,";
 
-        s += String.valueOf(row)+" ";
-        s += String.valueOf(col)+" ";
+        s += String.valueOf(row)+",";
+        s += String.valueOf(col)+",";
 
-        for (int i = 0; i < this.tiles.length; i++)
-        {
-            s += this.tiles[i];
+        for (int i = 0; i < this.tiles.length; i++) {
+            s += this.tiles[i].letter;
         }
         return s;
     }

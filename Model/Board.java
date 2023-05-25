@@ -66,18 +66,18 @@ public class Board
     {
         try {
             PrintWriter outToServer = new PrintWriter(Host.getHost(null, 0, 0, 0).hostSocket.getOutputStream());
-            String s = null;
-            s += "Q,";
+            String s = "";
+            s += "Q,"+"newFile.txt,";
             for (int i = 0; i < word.length; i++) {
-                s += word[i];
+                s += word[i].letter;
             }
             outToServer.println(s);
+            outToServer.flush();
         } catch (IOException e) {throw new RuntimeException(e);}
 
         try {
             Scanner in = new Scanner(Host.getHost(null, 0, 0, 0).hostSocket.getInputStream());
-            String input = in.next();
-            if (input.equals("true\n"))
+            if (in.next().equals("true"))
                 return true;
             return false;
 
@@ -743,7 +743,8 @@ public class Board
 
        if (t)
        {
-           if (matTile[7][7] == null)
+           if (matTile[7][7] == null && dictionaryLegal(word.tiles))
+
            {
                for (int i = 0; i < word.tiles.length; i++)
                {
@@ -763,7 +764,6 @@ public class Board
 
            else
            {
-
                if (getWords(word) == null)
                    return score;
 

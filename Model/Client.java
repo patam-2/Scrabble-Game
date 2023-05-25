@@ -46,6 +46,7 @@ public class Client implements Player
         }
 
         out.println("9 0");
+        out.flush();
 
         this.id = Integer.parseInt(in.next());
         while (in.hasNext())
@@ -57,10 +58,26 @@ public class Client implements Player
         isConnected = true;
     }
 
-    public void askQuery(String query)
-    {
+    private void askQuery(String query) {
+        try {
+            this.socket = new Socket(ip,port);
+        } catch (IOException e) {
+            System.out.println("your code ran into an IOException");
+            return;
+        }
+        try {
+            out = new PrintWriter(socket.getOutputStream());
+            in = new Scanner(socket.getInputStream());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         out.println(query);
         out.flush();
+        try {
+            this.socket.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void closeClient() {
@@ -75,23 +92,10 @@ public class Client implements Player
 
     @Override
     public void actionPlay(int type) {
-
     }
 
     public int placeWord(Word word) {
         this.askQuery(id + " " + "1," + word.toString());
-
-        if (in.next().equals("t")) {
-
-            for(int i = 0; i < word.tiles.length; i++) {
-                tilesAmount.remove(word.tiles[i].letter);
-            }
-            while (in.hasNext()) {
-                String input = in.next();
-                char letter = input.charAt(0);
-                tilesAmount.add(letter);
-            }
-        }
         return 0;
     }
 
