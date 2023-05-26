@@ -23,7 +23,7 @@ public class MyServer {
     public void close()
     {
         stop = true;
-        //new Thread(()->close());
+       // new Thread(()->close());
     }
 
     private void startServer()
@@ -43,11 +43,11 @@ public class MyServer {
                     }
                     finally {
                         aClient.close();
+                        clientHandler.close();
                     }
                 }
                 catch (SocketTimeoutException e) {}
             }
-            clientHandler.close();
             System.out.println("t1");
             server.close();
         }catch (IOException e){e.printStackTrace();}

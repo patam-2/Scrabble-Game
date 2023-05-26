@@ -61,9 +61,12 @@ public class HostClientHandler implements ClientHandler
                     Tile[] tiles = new Tile[array.length];
 
                     for (int i = 0; i < array.length; i++) {
-                        tiles[i] = Tile.Bag.getBag().getTile(array[i]);
+                        for (int j = 0; j < Host.host.playerTilesMap.get(id).size(); j++)
+                        {
+                            if (Host.host.playerTilesMap.get(id).get(j).letter == array[i])
+                                tiles[i] = Host.host.playerTilesMap.get(id).get(j);
+                        }
                     }
-
                     Word word = new Word(tiles, row, col, vertical);
                     int score = Host.host.placeWord(word);
                     String s = "";

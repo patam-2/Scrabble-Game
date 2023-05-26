@@ -73,11 +73,6 @@ public class Client implements Player
         }
         out.println(query);
         out.flush();
-        try {
-            this.socket.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     public void closeClient() {

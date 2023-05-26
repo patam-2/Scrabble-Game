@@ -20,7 +20,6 @@ public class Host implements Player
     public MyServer myClientServer;
     public static Host host = null;
     public HashMap<Integer, ArrayList<Tile>> playerTilesMap;
-    public ArrayList<Tile> hostTiles;
     public int id;
     public int turn;
     public int rounds;
@@ -34,13 +33,12 @@ public class Host implements Player
         this.serverIp = ip;
         this.bag = Tile.Bag.getBag();
         this.board = Board.getBoard();
-        this.hostTiles = new ArrayList<>();
         this.playerTilesMap = new HashMap<>();
         this.numberOfClients = 1;
+        this.playerTilesMap.put(id , new ArrayList<Tile>());
         for (int i = 0; i < 26; i++) {
-            this.hostTiles.add(bag.getRand());
+            this.playerTilesMap.get(id).add(bag.getRand());
         }
-        this.playerTilesMap.put(id, this.hostTiles);
         this.myClientServer = new MyServer(hostPort, new HostClientHandler());
         this.myClientServer.start();
     }
@@ -67,19 +65,19 @@ public class Host implements Player
 
         if (score != 0) {
             for(int i = 0; i < word.tiles.length; i++) {
-                this.hostTiles.remove(hostTiles.indexOf(word.tiles[i]));
+                this.playerTilesMap.get(id).remove(playerTilesMap.get(1).indexOf(word.tiles[i]));
             }
             for (int i = 0; i < word.tiles.length; i++) {
                 Tile t = bag.getRand();
-                this.hostTiles.add(t);
+                this.playerTilesMap.get(id).add(t);
             }
             this.turn = 1 + (this.turn % this.numberOfClients);
         }
-        try {
-            hostSocket.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+//        try {
+//            hostSocket.close();
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
         return score;
     }
 
@@ -108,7 +106,6 @@ public class Host implements Player
             if (in.next().equals("true")) {
                 flag = true;
             }
-            hostSocket.close();
             return flag;
         } catch (IOException e) {throw new RuntimeException(e);}
     }
