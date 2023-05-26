@@ -14,8 +14,9 @@ public class HostTest {
         Word word = new Word(tilesA, 7, 7, true);
         boolean flag = gameManager.host.challenge(String.valueOf(tilesA[0].letter));
         System.out.println("host res: " + flag);
+        int res = gameManager.host.placeWord(word);
+        System.out.println("the score is: "+res);
         System.out.println();
-        gameManager.host.placeWord(word);
     }
 }
 

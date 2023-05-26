@@ -16,8 +16,8 @@ public class ClientTest {
         System.out.println("client res for challenge: " + flag);
         System.out.println();
 
-        //gameManager.host.turn++;
-        client.placeWord(word);
+        int res = client.placeWord(word);
+        System.out.println(res);
     }
 }
 
