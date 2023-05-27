@@ -35,7 +35,8 @@ public class HostClientHandler implements ClientHandler
 
                 Host.host.playerTilesMap.put(Host.host.numberOfClients, tiles);
                 String s = String.valueOf(Host.host.numberOfClients);
-                System.out.println("num of clients:" + s);
+                System.out.println();
+                System.out.println("The number of clients is: " + s);
                 out.println(s);
             }
 
@@ -85,8 +86,8 @@ public class HostClientHandler implements ClientHandler
                         Host.host.turn = 1 + (Host.host.turn % Host.host.numberOfClients);
 
                         if (id == Host.host.numberOfClients) {
-                            Host.host.rounds--;
-                            if (Host.host.rounds == 0)
+                            Host.host.setNumberOfRounds(Host.host.getNumberOfRounds() - 1);
+                            if (Host.host.getNumberOfRounds() == 0)
                                 Host.host.closeGame();
                         }
                     } else {

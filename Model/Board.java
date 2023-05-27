@@ -2,6 +2,7 @@ package Model;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -64,6 +65,11 @@ public class Board
 
     public boolean dictionaryLegal(Tile[] word)
     {
+        try {
+            Host.getHost(null, 0, 0, 0).hostSocket = new Socket(Host.getHost(null, 0, 0, 0).serverIp, Host.getHost(null, 0, 0, 0).serverPort);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         try {
             PrintWriter outToServer = new PrintWriter(Host.getHost(null, 0, 0, 0).hostSocket.getOutputStream());
             String s = "";

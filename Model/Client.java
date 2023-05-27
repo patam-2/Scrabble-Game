@@ -60,7 +60,7 @@ public class Client implements Player
 
     private void askQuery(String query) {
         try {
-            this.socket = new Socket(ip,port);
+            this.socket = new Socket(ip,port); // from here jumps to the HostClientHandler
         } catch (IOException e) {
             System.out.println("your code ran into an IOException");
             return;

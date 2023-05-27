@@ -55,12 +55,15 @@ public class Host implements Player
     public void actionPlay(int type) {
     }
 
+    public void setNumberOfRounds(int rounds) {
+        this.rounds = rounds;
+    }
+    public int getNumberOfRounds()
+    {
+        return this.rounds;
+    }
+
     public int placeWord(Word word) {
-        try {
-            hostSocket = new Socket(serverIp, serverPort);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
         int score = this.board.tryPlaceWord(word);
 
         if (score != 0) {
@@ -73,11 +76,6 @@ public class Host implements Player
             }
             this.turn = 1 + (this.turn % this.numberOfClients);
         }
-//        try {
-//            hostSocket.close();
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
         return score;
     }
 
