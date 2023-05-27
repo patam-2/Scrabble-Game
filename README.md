@@ -21,7 +21,9 @@ Rules and the course of the game-
 So for the purpose of the project, we will define a slightly simpler set of rules than the original game:
   1. Each player randomly draws a tile from the bag.
   2. The order of the players turns is determined by the order of the letters drawn (from smallest to largest).
+ 
      a. If an empty tile is drawn, we will return it to the bag and draw another one.
+     
   3. All the tiles are returned to the bag.
   4. Each player randomly draws 7 tiles.
   5. The first player (the one who drew the smallest letter in the lottery) must form a legal word which passes through the central slot (the star) in the board.
@@ -31,8 +33,11 @@ So for the purpose of the project, we will define a slightly simpler set of rule
      b. After laying down a legal word he needs to draw from the bag so that he has 7 tiles again.
      
   6. Gradually, each player, in turn, assembles a legal word using the tiles in his possession.
+  
      a. As in a crossword puzzle, each word must rest on one of the tiles on the board.
+     
      b. After writing the word, the player draws additional tiles from the bag, so he always has 7 tiles. 
+     
      c. His score is accumulated according to all the words created on the board following the placing of the tiles.
      
          i. Tiles placed on double or triple letter squares will be doubled or tripled in value accordingly.
