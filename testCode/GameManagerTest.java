@@ -24,48 +24,26 @@ public class GameManagerTest
         //Starts the big server
 
         GameManager gameManager = new GameManager(serverIp, serverPort, hostPort, rounds);
-        Client client = new Client(hostPort, serverIp);
+        Client clientA = new Client(hostPort, serverIp);
+        Client clientB = new Client(hostPort, serverIp);
         Scanner sc = new Scanner(System.in);
         int c = 2;
 
         System.out.println();
 
+        HostTest.hostTest(c, gameManager);
+        ClientTest.clientTest(c, gameManager, clientA);
+        ClientTest.clientTest(3, gameManager, clientB);
 
         HostTest.hostTest(c, gameManager);
-        //ClientTest.clientTest(c, gameManager, client);
-        HostTest.hostTest(c, gameManager);
+        ClientTest.clientTest(c, gameManager, clientA);
+        ClientTest.clientTest(3, gameManager, clientB);
+
         HostTest.hostTest(4, gameManager);
-        ClientTest.clientTest(4, gameManager, client);
+        ClientTest.clientTest(4, gameManager, clientA);
+        ClientTest.clientTest(3, gameManager, clientB);
 
-
-
-
-//        while(Host.host.rounds != 0)
-//        {
-//            System.out.println("hostTest: ");
-//            for (int i = 0; i < gameManager.host.playerTilesMap.get(1).size(); i++) {
-//                System.out.print(gameManager.host.playerTilesMap.get(1).get(i).letter + " ");
-//            }
-//            System.out.println();
-//            System.out.print("please enter your index: ");
-//            //c = sc.nextInt();
-//            //HostTest.hostTest(c, gameManager);
-//            HostTest.hostTest(4, gameManager);
-//
-//
-//            System.out.println("clientTest: ");
-//            for (int i = 0; i < gameManager.host.playerTilesMap.get(2).size(); i++) {
-//                System.out.print(gameManager.host.playerTilesMap.get(2).get(i).letter+" ");
-//            }
-//            System.out.println();
-//            //System.out.print("please enter your index: ");
-//            //c = sc.nextInt();
-//            System.out.println();
-//            //ClientTest.clientTest(c, gameManager, client);
-//            ClientTest.clientTest(2, gameManager, client);
-//        }
-
-        System.out.println("flag");
+        System.out.println("We are closing the game now.....:)");
         sc.close();
         gameManager.host.closeGame();
         facadeServer.close();
