@@ -1,6 +1,7 @@
 # PATAMPROJECT
 
 So.. About the Project:
+
 We are creating a Java based desktop application of a Scrabble game.
 The game is built in MVVM architecture (Model-View-View Model) allowing each game to have a local Host running the game,
 and up to 3 additional clients connecting remotely through the Host. 
@@ -10,12 +11,14 @@ This will allow us to have multiple games running at once all through this serve
 We have also created a facade to create more presentable and easier to use game functions.
 
 This project is part of our second semester Advanced Software Development course and is designed and created in three major legs:
+
   1. First semester individual project- creating all of the game legalities and basic rules. This includes creating a server,
      dictionaries, bloom filter to find and predict the legality of certain words, and all logical decisions regarding the game.
   2. Second semester group project part 1- Designing the games architecture and creating the Model layer including complete functionality and testing.
   3. Second semester group project part 2- Creating the View and View-Model layers including complete functionality and testing.
 
 Rules and the course of the game:
+
 For the purpose of the project, we will define a slightly simpler set of rules than the original game:
   1. Each player randomly draws a tile from the bag.
   2. The order of the players turns is determined by the order of the letters drawn (from smallest to largest).
@@ -29,10 +32,16 @@ For the purpose of the project, we will define a slightly simpler set of rules t
      a. As in a crossword puzzle, each word must rest on one of the tiles on the board.
      b. After writing the word, the player draws additional tiles from the bag, so he always has 7 tiles. 
      c. His score is accumulated according to all the words created on the board following the placing of the tiles.
+     
          i. Tiles placed on double or triple letter squares will be doubled or tripled in value accordingly.
+         
          ii. The word then receives the sum point score of all the tiles used to make the word.
-         iii. This amount will be doubled or tripled for each doubling or tripling word slot that is one of the tiles are superimposed on it (that is, it is possible, for example, to multiply by 4 or 9 if the word took two double word or triple word slots respectively).
+         
+         iii. This amount will be doubled or tripled for each doubling or tripling word slot that is one of the tiles are superimposed on it
+              (that is, it is possible, for example, to multiply by 4 or 9 if the word took two double word or triple word slots respectively).
+              
          iv. The above calculation is true for every new word created on the board following the placement in turn.
+         
   7. A player who cannot form a valid word forfeits his turn.
   8. The game will end after N rounds.
 
