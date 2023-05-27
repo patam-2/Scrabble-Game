@@ -1,5 +1,5 @@
 # PATAMPROJECT
-ReadME-
+
 So.. About the Project:
 We are creating a Java based desktop application of a Scrabble game.
 The game is built in MVVM architecture (Model-View-View Model) allowing each game to have a local Host running the game,
