@@ -26,8 +26,11 @@ For the purpose of the project, we will define a slightly simpler set of rules t
   3. All the tiles are returned to the bag.
   4. Each player randomly draws 7 tiles.
   5. The first player (the one who drew the smallest letter in the lottery) must form a legal word which passes through the central slot (the star) in the board.
+     
      a. Only he gets a double score for that letter. 
+    
      b. After laying down a legal word he needs to draw from the bag so that he has 7 tiles again.
+     
   6. Gradually, each player, in turn, assembles a legal word using the tiles in his possession.
      a. As in a crossword puzzle, each word must rest on one of the tiles on the board.
      b. After writing the word, the player draws additional tiles from the bag, so he always has 7 tiles. 
