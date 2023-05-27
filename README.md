@@ -37,8 +37,13 @@ For the purpose of the project, we will define a slightly simpler set of rules t
   8. The game will end after N rounds.
 
 A legal word must meet all the following conditions:
+
     •	Written from left to right or from top to bottom (and not in any other way).
+    
     •	A word that appears in one of the books chosen for the game.
+    
     •	Rests on one of the existing tiles on the board.
+    
     •	Does not produce other illegal words on the board.
+    
 Thank you for reading:)
