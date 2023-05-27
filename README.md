@@ -17,9 +17,8 @@ This project is part of our second semester Advanced Software Development course
   2. Second semester group project part 1- Designing the games architecture and creating the Model layer including complete functionality and testing.
   3. Second semester group project part 2- Creating the View and View-Model layers including complete functionality and testing.
 
-Rules and the course of the game:
-
-For the purpose of the project, we will define a slightly simpler set of rules than the original game:
+Rules and the course of the game-
+So for the purpose of the project, we will define a slightly simpler set of rules than the original game:
   1. Each player randomly draws a tile from the bag.
   2. The order of the players turns is determined by the order of the letters drawn (from smallest to largest).
      a. If an empty tile is drawn, we will return it to the bag and draw another one.
