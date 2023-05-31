@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.BorderPane?>
+<?import View.BoardDisplayer?>
+
+<BorderPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.BoardController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="542.0" prefWidth="574.0" style="-fx-background-image: url('file:///C:/Users/ariel/OneDrive/Desktop/RunningTask_1/BookScabbleFacade/src/View/resources/pinkWall.jpg'); -fx-background-size: cover;">
+    <center>
+        <BoardDisplayer fx:id="boardDisplayer" height="350.0" width="503.0" BorderPane.alignment="CENTER">
+            <basicPinkBackgroundSquare>
+                <fx:string>
+                    View/resources/pinkWall.jpg
+                </fx:string>
+            </basicPinkBackgroundSquare>
+        </BoardDisplayer>
+    </center>
+</BorderPane>
+
+
+
+<!--        public StringProperty basicPinkBackgroundSquare;-->
+<!--        public StringProperty purpleSquare;-->
+<!--        public StringProperty lightPinkSquare;-->
+<!--        public StringProperty yellowSquare;-->
+<!--        public StringProperty starSquare;-->
+<!--        public StringProperty darkPinkSquare;-->
+
