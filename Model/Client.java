@@ -29,7 +29,7 @@ public class Client implements Player
         try {
            this.socket = new Socket(ip,port);
         } catch (IOException e) {
-            System.out.println("your code ran into an IOException");
+            System.out.println("your code ran into an IOException in ranClient");
             return;
         }
 

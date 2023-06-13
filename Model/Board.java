@@ -73,7 +73,7 @@ public class Board
         try {
             PrintWriter outToServer = new PrintWriter(Host.getHost(null, 0, 0, 0).hostSocket.getOutputStream());
             String s = "";
-            s += "Q,"+"newFile.txt,";
+            s += "Q,"+"alice_in_wonderland.txt,HarryPotter.txt,TheMatrix.txt,newFile.txt,";
             for (int i = 0; i < word.length; i++) {
                 s += word[i].letter;
             }

@@ -12,7 +12,9 @@ public class DictionaryManager extends Dictionary
     }
 
     public static DictionaryManager get() {
-        if (dictionaryManager == null) { dictionaryManager = new DictionaryManager(); }
+        if (dictionaryManager == null) {
+            dictionaryManager = new DictionaryManager();
+        }
         return dictionaryManager;
     }
 

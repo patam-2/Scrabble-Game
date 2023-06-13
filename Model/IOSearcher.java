@@ -15,7 +15,7 @@ public class IOSearcher
 
             while (scan.hasNext())
             {
-                String line = scan.nextLine();
+                String line = scan.nextLine().toUpperCase();
                 if (line.contains(word))
                 {
                     fileReader.close();

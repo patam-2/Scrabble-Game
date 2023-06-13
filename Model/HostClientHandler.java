@@ -14,6 +14,7 @@ public class HostClientHandler implements ClientHandler
     @Override
     public void handleClient(InputStream inFromclient, OutputStream outToClient)
     {
+        System.out.println("its me!");
         in = new Scanner(inFromclient);
         out = new PrintWriter(outToClient);
 
@@ -26,7 +27,7 @@ public class HostClientHandler implements ClientHandler
 
             if (question == '0') {
                 ArrayList<Tile> tiles = new ArrayList<>();
-                Host.host.numberOfClients++;
+                Host.host.setNumberOfClients();
 
                 for (int i = 0; i < 26; i++) {
                     Tile t = Host.host.bag.getRand();
@@ -35,6 +36,7 @@ public class HostClientHandler implements ClientHandler
 
                 Host.host.playerTilesMap.put(Host.host.numberOfClients, tiles);
                 String s = String.valueOf(Host.host.numberOfClients);
+                Host.host.updateAndNotify();
                 System.out.println();
                 System.out.println("The number of clients is: " + s);
                 out.println(s);
@@ -90,13 +92,16 @@ public class HostClientHandler implements ClientHandler
                             if (Host.host.getNumberOfRounds() == 0)
                                 Host.host.closeGame();
                         }
-                    } else {
+
+                        Host.host.updateAndNotify();
+                    }
+                    else {
                         s += "f";
                     }
                     out.println(s);
                 }
 
-                if (question == '2') {
+                if (question == '2') { // Challenge
                     String flag = String.valueOf(Host.host.challenge(input.substring(2)));
                     out.println(flag);
                 }

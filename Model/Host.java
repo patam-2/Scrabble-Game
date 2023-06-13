@@ -6,12 +6,13 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Observable;
 import java.util.Scanner;
 
 
-public class Host implements Player
+public class Host extends Observable implements Player
 {
-    public int numberOfClients;
+    public int numberOfClients = 0;
     public Socket hostSocket;
     public int serverPort;
     public Tile.Bag bag;
@@ -36,7 +37,7 @@ public class Host implements Player
         this.playerTilesMap = new HashMap<>();
         this.numberOfClients = 1;
         this.playerTilesMap.put(id , new ArrayList<Tile>());
-        for (int i = 0; i < 26; i++) {
+        for (int i = 0; i < 7; i++) {
             this.playerTilesMap.get(id).add(bag.getRand());
         }
         this.myClientServer = new MyServer(hostPort, new HostClientHandler());
@@ -52,9 +53,7 @@ public class Host implements Player
     }
 
     @Override
-    public void actionPlay(int type) {
-    }
-
+    public void actionPlay(int type) {}
     public void setNumberOfRounds(int rounds) {
         this.rounds = rounds;
     }
@@ -75,6 +74,7 @@ public class Host implements Player
                 this.playerTilesMap.get(id).add(t);
             }
             this.turn = 1 + (this.turn % this.numberOfClients);
+            updateAndNotify();
         }
         return score;
     }
@@ -93,7 +93,7 @@ public class Host implements Player
         try {
             PrintWriter outToServer = new PrintWriter(hostSocket.getOutputStream());
             String s1 = "";
-            s1 += "C," +"newFile.txt," + s;
+            s1 += "C," + "alice_in_wonderland.txt,HarryPotter.txt,TheMatrix.txt,newFile.txt," + s;
             outToServer.println(s1);
             outToServer.flush();
         } catch (IOException e) {throw new RuntimeException(e);}
@@ -106,5 +106,17 @@ public class Host implements Player
             }
             return flag;
         } catch (IOException e) {throw new RuntimeException(e);}
+    }
+
+    public void setNumberOfClients() {
+        this.numberOfClients++;
+        setChanged();
+        notifyObservers();
+        System.out.println("Host: " + this.numberOfClients);
+    }
+
+    public void updateAndNotify() {
+        setChanged();
+        notifyObservers();
     }
 }

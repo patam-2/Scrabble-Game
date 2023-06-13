@@ -29,7 +29,7 @@ public class Dictionary
                 while (scan.hasNext())
                 {
                     scan.useDelimiter(" ");
-                    String word = scan.next();
+                    String word = scan.next().toUpperCase();
                     this.bloomFilter.add(word);
                 }
                 this.files[i] = s;
@@ -69,8 +69,8 @@ public class Dictionary
     {
         try
         {
-            for (String st : files)
-            {
+//            for (String st : files)
+//            {
                 if (IOSearcher.search(s, files))
                 {
                     existsCacheManager.words.add(s);
@@ -80,12 +80,12 @@ public class Dictionary
                 existsCacheManager.words.remove(s);
                 notExistsCacheManager.words.add(s);
                 return false;
-            }
+//            }
         }
         catch (IOException e)
         {
             throw new RuntimeException(e);
         }
-        return false;
+        //return false;
     }
 }
