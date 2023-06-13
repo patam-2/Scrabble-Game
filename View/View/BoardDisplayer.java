@@ -78,7 +78,6 @@ public class BoardDisplayer extends Canvas
             Image starSquareImg = null;
             Image darkPinkSquareImg = null;
 
-
             try {
                 basicPinkBackgroundSquareImg = new Image(new FileInputStream(basicPinkBackgroundSquare.get()));
                 purpleSquareImg = new Image(new FileInputStream(purpleSquare.get()));
@@ -178,5 +177,4 @@ public class BoardDisplayer extends Canvas
     public void setDarkPinkSquare(String darkPinkSquare) {
         this.darkPinkSquare.set(darkPinkSquare);
     }
-
 }

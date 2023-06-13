@@ -2,36 +2,12 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MenuController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="542.0" prefWidth="574.0" style="-fx-background-image: url('file:///C:/Users/ariel/OneDrive/Desktop/RunningTask_1/BookScabbleFacade/src/View/resources/pinkWall.jpg'); -fx-background-size: cover;">
-    <top>
-        <MenuBar prefHeight="0.0" prefWidth="1291.0" BorderPane.alignment="CENTER">
-            <menus>
-                <Menu mnemonicParsing="false" text="File">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="Close" />
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Edit">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="Delete" />
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="About" />
-                    </items>
-                </Menu>
-            </menus>
-        </MenuBar>
-    </top>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="542.0" prefWidth="574.0" style="-fx-background-image: url('file:///C:/Users/ariel/OneDrive/Desktop/RunningTask_1/BookScabbleFacade/src/View/resources/pinkWall.jpg'); -fx-background-size: cover;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MenuController">
     <center>
         <VBox alignment="CENTER" fillWidth="false" prefHeight="248.0" prefWidth="374.0" spacing="50.0" BorderPane.alignment="CENTER">
             <children>
@@ -40,21 +16,18 @@
                         <Font name="Corbel Light" size="33.0" />
                     </font>
                 </Text>
-                <Button fx:id="hostPlayerButton" mnemonicParsing="false" style="-fx-background-color: #FFFFFF;" text="Host Player" textFill="#c9a0ab"
-                        onMousePressed="#handleHostPlayerButtonPressed" onMouseReleased="#handleHostPlayerButtonReleased">
+                <Button fx:id="hostPlayerButton" mnemonicParsing="false" onAction="#createHostPlayer" onMousePressed="#handleHostPlayerButtonPressed" onMouseReleased="#handleHostPlayerButtonReleased" style="-fx-background-color: #FFFFFF;" text="Host Player" textFill="#c9a0ab">
                     <font>
                         <Font name="Corbel Light" size="25.0" />
                     </font>
                 </Button>
-                <Button fx:id="regularPlayerButton" mnemonicParsing="false" style="-fx-background-color: #FFFFFF;" text="Regular Player" textFill="#c9a0ab"
-                        onMousePressed="#handleRegularPlayerButtonPressed" onMouseReleased="#handleRegularPlayerButtonReleased">
+                <Button fx:id="regularPlayerButton" mnemonicParsing="false" onAction="#createClientPlayer" onMousePressed="#handleRegularPlayerButtonPressed" onMouseReleased="#handleRegularPlayerButtonReleased" style="-fx-background-color: #FFFFFF;" text="Regular Player" textFill="#c9a0ab">
                     <font>
                         <Font name="Corbel Light" size="25.0" />
                     </font>
                 </Button>
 
-                <Button fx:id="quitButton" mnemonicParsing="false" style="-fx-background-color: #FFFFFF;" text="Quit" textFill="#c9a0ab"
-                        onMousePressed="#handleQuitButtonPressed" onMouseReleased="#handleQuitButtonReleased">
+                <Button fx:id="quitButton" mnemonicParsing="false" onMousePressed="#handleQuitButtonPressed" onMouseReleased="#handleQuitButtonReleased" style="-fx-background-color: #FFFFFF;" text="Quit" textFill="#c9a0ab">
                     <font>
                         <Font name="Corbel Light" size="25.0" />
                     </font>

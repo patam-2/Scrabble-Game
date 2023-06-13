@@ -49,18 +49,6 @@ public class BoardController {
                                             {"3W", "0", "0", "2L", "0", "0", "0", "3W", "0", "0", "0", "2L", "0", "0", "3W"},};
 
 
-    public BoardController()
-    {
-
-    }
-
-    public void init(ViewModel viewModel)
-    {
-        this.viewModel = viewModel;
-        this.viewModel.map.addListener();
-    }
-
-
     @FXML
     private void handleQueryButtonPressed(MouseEvent  event) {
         queryButton.setStyle("-fx-background-color: #E6B0AA;");
