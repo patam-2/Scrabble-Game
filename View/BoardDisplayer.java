@@ -15,7 +15,7 @@ public class BoardDisplayer extends Canvas
     public int col;
     public int row;
     public String[][] boardMat;
-    private StringProperty basicPinkBackgroundSquare;
+    public StringProperty basicPinkBackgroundSquare;
     public StringProperty purpleSquare;
     public StringProperty lightPinkSquare;
     public StringProperty yellowSquare;
@@ -37,12 +37,16 @@ public class BoardDisplayer extends Canvas
 
     public void setRow(int row)
     {
+        if (row == -1 || row == 15)
+            return;
         this.row = row;
         redraw();
     }
 
     public void setCol(int col)
     {
+        if (col == -1 || col == 15)
+            return;
         this.col = col;
         redraw();
     }
@@ -74,14 +78,13 @@ public class BoardDisplayer extends Canvas
             Image starSquareImg = null;
             Image darkPinkSquareImg = null;
 
-
             try {
-                basicPinkBackgroundSquareImg = new Image(new FileInputStream(getBasicPinkBackgroundSquareName()));
-                purpleSquareImg = new Image(new FileInputStream(getPurpleSquareName()));
-                lightPinkSquareImg = new Image(new FileInputStream(getLightPinkSquareName()));
-                yellowSquareImg = new Image(new FileInputStream(getYellowSquareSquareName()));
-                starSquareImg = new Image(new FileInputStream(getStarSquareName()));
-                darkPinkSquareImg = new Image(new FileInputStream(getDarkPinkSquareSquareName()));
+                basicPinkBackgroundSquareImg = new Image(new FileInputStream(basicPinkBackgroundSquare.get()));
+                purpleSquareImg = new Image(new FileInputStream(purpleSquare.get()));
+                lightPinkSquareImg = new Image(new FileInputStream(lightPinkSquare.get()));
+                yellowSquareImg = new Image(new FileInputStream(yellowSquare.get()));
+                starSquareImg = new Image(new FileInputStream(starSquare.get()));
+                darkPinkSquareImg = new Image(new FileInputStream(darkPinkSquare.get()));
 
             } catch (FileNotFoundException e) {throw new RuntimeException(e);}
 
@@ -92,51 +95,63 @@ public class BoardDisplayer extends Canvas
             {
                 for (int j = 0; j < boardMat[i].length; j++)
                 {
-                    if (boardMat[i][j] != "3W") {
+                    if (boardMat[i][j].equals("3W")) {
                         gc.drawImage(purpleSquareImg, j * w, i * h, w, h);
                     }
 
-                    else if (boardMat[i][j] != "2L")
+                    else if (boardMat[i][j].equals("2L"))
                     {
                         gc.drawImage(lightPinkSquareImg, j * w, i * h, w, h);
                     }
 
-                    else if (boardMat[i][j] != "2W")
+                    else if (boardMat[i][j].equals("2W"))
                     {
                         gc.drawImage(yellowSquareImg, j * w, i * h, w, h);
                     }
 
-                    else if (boardMat[i][j] != "3L")
+                    else if (boardMat[i][j].equals("3L"))
                     {
                         gc.drawImage(darkPinkSquareImg, j * w, i * h, w, h);
                     }
 
-                    else if (boardMat[i][j] != "2WS")
+                    else if (boardMat[i][j].equals("2WS"))
                     {
                         gc.drawImage(starSquareImg, j * w, i * h, w, h);
                     }
 
-                    else if (boardMat[i][j] != "0")
+                    else if (boardMat[i][j].equals("0"))
                     {
                         gc.drawImage(basicPinkBackgroundSquareImg, j * w, i * h, w, h);
                     }
                 }
             }
             gc.setFill(Color.RED);
-            gc.fillRect(col*w, row*w+7, w, h-2);
+            gc.fillRect(col*w, row*h, w, h);
         }
     }
 
-    public String getBasicPinkBackgroundSquareName(){
+    public String getBasicPinkBackgroundSquare(){
         return basicPinkBackgroundSquare.get();
     }
 
-    public String getPurpleSquareName(){
+    public String getPurpleSquare(){
         return purpleSquare.get();
     }
 
-    public String getLightPinkSquareName(){
+    public String getLightPinkSquare(){
         return lightPinkSquare.get();
+    }
+
+    public String getYellowSquare(){
+        return yellowSquare.get();
+    }
+
+    public String getDarkPinkSquare(){
+        return darkPinkSquare.get();
+    }
+
+    public String getStarSquare(){
+        return starSquare.get();
     }
 
     public void setBasicPinkBackgroundSquare(String basicPinkBackgroundSquare) {
@@ -161,17 +176,5 @@ public class BoardDisplayer extends Canvas
 
     public void setDarkPinkSquare(String darkPinkSquare) {
         this.darkPinkSquare.set(darkPinkSquare);
-    }
-
-    public String getYellowSquareSquareName(){
-        return yellowSquare.get();
-    }
-
-    public String getDarkPinkSquareSquareName(){
-        return darkPinkSquare.get();
-    }
-
-    public String getStarSquareName(){
-        return starSquare.get();
     }
 }

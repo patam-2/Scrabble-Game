@@ -1,11 +1,17 @@
 package View;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+import java.io.IOException;
+import java.util.Objects;
+
 
 public class MenuController {
-
 
     @FXML
     private Button hostPlayerButton;
@@ -17,12 +23,12 @@ public class MenuController {
     private Button quitButton;
 
     @FXML
-    private void handleHostPlayerButtonPressed(MouseEvent  event) {
+    public void handleHostPlayerButtonPressed(MouseEvent event) {
         hostPlayerButton.setStyle("-fx-background-color: #FADBD8;");
     }
 
     @FXML
-    private void handleRegularPlayerButtonPressed(MouseEvent  event) {
+    public void handleRegularPlayerButtonPressed(MouseEvent event) {
         regularPlayerButton.setStyle("-fx-background-color: #FADBD8;");
     }
 
@@ -32,12 +38,12 @@ public class MenuController {
     }
 
     @FXML
-    private void handleHostPlayerButtonReleased(MouseEvent event) {
+    public void handleHostPlayerButtonReleased(MouseEvent event) {
         hostPlayerButton.setStyle("-fx-background-color: #FFFFFF;");
     }
 
     @FXML
-    private void handleRegularPlayerButtonReleased(MouseEvent event) {
+    public void handleRegularPlayerButtonReleased(MouseEvent event) {
         regularPlayerButton.setStyle("-fx-background-color: #FFFFFF;");
     }
 
@@ -46,16 +52,31 @@ public class MenuController {
         quitButton.setStyle("-fx-background-color: #FFFFFF;");
     }
 
+    @FXML
+    public void createHostPlayer()
+    {
+        Stage stage = (Stage)hostPlayerButton.getScene().getWindow();
+        stage.close();
+        Stage primaryStage = new Stage();
+        try {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("hostPage.fxml")));
+            primaryStage.setTitle("Host Login");
+            primaryStage.setScene(new Scene(root, 650, 500));
+            primaryStage.show();
+        } catch (IOException e) {throw new RuntimeException(e);}
+    }
 
-//    public void openFile()
-//    {
-//        FileChooser fc=new FileChooser();
-//        fc.setTitle("open maze file");
-//        fc.setInitialDirectory(new File("./resources/pinkWall.jpg"));
-//        File chosen=fc.showOpenDialog(null);
-//        if(chosen!=null){
-//            System.out.println(chosen.getName());
-//        }
-//    }
-
+    @FXML
+    public void createClientPlayer()
+    {
+        Stage stage = (Stage)regularPlayerButton.getScene().getWindow();
+        stage.close();
+        Stage primaryStage = new Stage();
+        try {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("clientPage.fxml")));
+            primaryStage.setTitle("Client Login");
+            primaryStage.setScene(new Scene(root, 650, 500));
+            primaryStage.show();
+        } catch (IOException e) {throw new RuntimeException(e);}
+    }
 }
