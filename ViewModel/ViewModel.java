@@ -19,7 +19,7 @@ public class ViewModel extends Observable implements Observer {
         this.hostPort = new SimpleStringProperty();
         this.rounds = new SimpleIntegerProperty();
         this.gameManager = gameManagerModel;
-        this.gameManager.addObserver(this);
+        this.gameManager.host.addObserver(this);
     }
 
 
