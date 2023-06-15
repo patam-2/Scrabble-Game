@@ -10,8 +10,7 @@ import java.util.Observable;
 import java.util.Scanner;
 
 
-public class Host extends Observable implements Player
-{
+public class Host extends Observable implements Player {
     public int numberOfClients = 0;
     public Socket hostSocket;
     public int serverPort;
@@ -74,7 +73,7 @@ public class Host extends Observable implements Player
                 this.playerTilesMap.get(id).add(t);
             }
             this.turn = 1 + (this.turn % this.numberOfClients);
-            updateAndNotify();
+            //updateAndNotify();
         }
         return score;
     }
@@ -110,8 +109,7 @@ public class Host extends Observable implements Player
 
     public void setNumberOfClients() {
         this.numberOfClients++;
-        setChanged();
-        notifyObservers();
+        updateAndNotify();
         System.out.println("Host: " + this.numberOfClients);
     }
 

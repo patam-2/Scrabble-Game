@@ -14,7 +14,7 @@ public class HostClientHandler implements ClientHandler
     @Override
     public void handleClient(InputStream inFromclient, OutputStream outToClient)
     {
-        System.out.println("its me!");
+        System.out.println("its ClientHostHandler!");
         in = new Scanner(inFromclient);
         out = new PrintWriter(outToClient);
 
@@ -36,7 +36,7 @@ public class HostClientHandler implements ClientHandler
 
                 Host.host.playerTilesMap.put(Host.host.numberOfClients, tiles);
                 String s = String.valueOf(Host.host.numberOfClients);
-                Host.host.updateAndNotify();
+                //Host.host.updateAndNotify();
                 System.out.println();
                 System.out.println("The number of clients is: " + s);
                 out.println(s);
