@@ -7,9 +7,9 @@ import java.util.Observable;
 import java.util.Observer;
 
 
-public class ViewModel extends Observable implements Observer {
+public class ViewModel implements Observer {
 
-    public GameManager gameManager;
+    public GameManager gameManager; // the Model
     public SimpleIntegerProperty rounds;
     public SimpleStringProperty hostPort;
     public SimpleStringProperty numOfClients;
@@ -22,15 +22,12 @@ public class ViewModel extends Observable implements Observer {
         this.gameManager.host.addObserver(this);
     }
 
-
     @Override
-    public void update(Observable o, Object arg)
-    {
-        this.numOfClients = new SimpleStringProperty(String.valueOf(this.gameManager.host.numberOfClients));
-        this.rounds = new SimpleIntegerProperty(this.gameManager.host.rounds);
-        System.out.println("num of clients: " + gameManager.host.numberOfClients);
-        setChanged();
-        notifyObservers();
+    public void update(Observable o, Object arg) {
+
+        this.numOfClients.set(String.valueOf(this.gameManager.host.numberOfClients));
+        this.rounds.set(this.gameManager.host.rounds);
+        System.out.println("update: " + numOfClients.getValue());
     }
 }
 
