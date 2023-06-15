@@ -6,29 +6,32 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
-import java.util.Observable;
-import java.util.Observer;
 
 
-public class HostWaitingController implements Observer
+public class HostWaitingController
 {
     @FXML
     public Button startGameButton;
     @FXML
-    public Text numOfClients;
+    public TextField numOfClients;
 
-    public HostWaitingController() {
-        HostController.viewModel.addObserver(this);
-        System.out.println("hostWaiting Created");
+    public HostWaitingController(){
+        this.numOfClients = new TextField("0");
+        init();
+    }
+
+    public void init(){
+        HostController.viewModel.numOfClients.bind(numOfClients.textProperty());
     }
 
     @FXML
     public void handelStartGameButton(ActionEvent actionEvent) {
+        System.out.println("Waiting controller host: this is the num of clients: " + numOfClients.getText());
         Stage stage = (Stage)startGameButton.getScene().getWindow();
         stage.close();
         Stage primaryStage = new Stage();
@@ -50,9 +53,4 @@ public class HostWaitingController implements Observer
         startGameButton.setStyle("-fx-background-color: #FFFFFF;");
     }
 
-    @Override
-    public void update(Observable o, Object arg) {
-        numOfClients.textProperty().set(HostController.viewModel.numOfClients.get());
-        System.out.println("the update: " + numOfClients.textProperty());
-    }
 }

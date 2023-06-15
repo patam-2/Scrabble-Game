@@ -76,10 +76,13 @@ public class HostController
             Stage stage = (Stage)hostSubmitButton.getScene().getWindow();
             stage.close();
             Stage primaryStage = new Stage();
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("hostWaiting.fxml")));
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            Parent root = fxmlLoader.load(Objects.requireNonNull(getClass().getResource("hostWaiting.fxml")));
             primaryStage.setTitle("Waiting Lounge");
             primaryStage.setScene(new Scene(root, 650, 500));
             primaryStage.show();
+            HostWaitingController hostWaitingController = fxmlLoader.getController();
+            //hostWaitingController.init();
         } catch (Exception e) {e.printStackTrace();}
     }
 

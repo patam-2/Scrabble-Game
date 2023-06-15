@@ -14,7 +14,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.ArrayList;
 import java.util.Objects;
 
 public class ClientController
@@ -29,10 +28,9 @@ public class ClientController
     public Button clientReturnButton;
     public InetAddress ip;
     public int port;
-    public ArrayList<Client> clientsList;
+    public Client client;
 
     public ClientController() {
-        this.clientsList = new ArrayList<>();
     }
 
     public void initialize() {
@@ -72,7 +70,7 @@ public class ClientController
             port = Integer.parseInt(clientPort.getText());
             System.out.println("Client Ip: " + ip);
             System.out.println("Client Port: " + port);
-            clientsList.add(new Client(port, ip));
+            client = new Client(port, ip);
 
             Stage stage = (Stage)clientSubmitButton.getScene().getWindow();
             stage.close();
