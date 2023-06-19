@@ -9,7 +9,7 @@ import java.util.Observer;
 
 public class ViewModel implements Observer {
 
-    public GameManager gameManager; // the Model
+    public GameManager gameManager;      // The Model
     public SimpleIntegerProperty rounds;
     public SimpleStringProperty hostPort;
     public SimpleStringProperty numOfClients;
@@ -25,9 +25,11 @@ public class ViewModel implements Observer {
     @Override
     public void update(Observable o, Object arg) {
 
-        this.numOfClients.set(String.valueOf(this.gameManager.host.numberOfClients));
-        this.rounds.set(this.gameManager.host.rounds);
-        System.out.println("update: " + numOfClients.getValue());
+        int num = this.gameManager.host.numberOfClients;
+        int numOfRounds = this.gameManager.host.rounds;
+        this.numOfClients.bindBidirectional(new SimpleStringProperty(String.valueOf(num)));
+        this.rounds.bindBidirectional(new SimpleIntegerProperty(numOfRounds));
+        System.out.println("The Update In The ViewModel- Number Of Clients: " + numOfClients.getValue());
     }
 }
 
