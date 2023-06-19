@@ -10,7 +10,7 @@ public class GameManagerTest
 {
     public static void main(String[] args)
     {
-        int serverPort = 1234;
+        int serverPort = 8888;
         int hostPort = 5678;
         int rounds = 2;
 

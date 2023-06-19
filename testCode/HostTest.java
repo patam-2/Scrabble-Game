@@ -4,8 +4,8 @@ import Model.*;
 
 public class HostTest {
 
-    public static void hostTest(int c, GameManager gameManager)
-    {
+    public static void hostTest(int c, GameManager gameManager) {
+
         Tile[] tilesA = new Tile[1];
         tilesA[0] = gameManager.host.playerTilesMap.get(1).get(c);
         System.out.println("Host- index: " + c);
