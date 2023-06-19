@@ -5,20 +5,22 @@ import ViewModel.ViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+
 import java.io.IOException;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
+import java.net.URL;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
 
-public class HostController
-{
+public class HostController implements Initializable {
+
     @FXML
     public TextField hostPort;
     @FXML
@@ -31,10 +33,21 @@ public class HostController
     public int port;
     public static ViewModel viewModel;
 
+    // OF TRY 2
+    //private static final Object lock = new Object();
+    //private static HostController instance;
+    //public CountDownLatch latch;
+
     public HostController() {
+        this.hostPort = new TextField("0000");
+        this.hostRounds = new TextField("0");
+        viewModel = null;
+        // OF TRY 2
+        //latch = new CountDownLatch(1);
     }
 
-    public void initialize() {
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         hostSubmitButton.setDisable(true);                                               // Disable the submit button initially
         hostPort.textProperty().addListener((observable, oldValue, newValue) -> {        // Add a listener to both text fields' textProperty
             if (!isNumeric(hostPort.getText()) || !isNumeric(hostRounds.getText())) {    // Check if either text field contains letters or is not a valid number
@@ -53,26 +66,33 @@ public class HostController
         });
     }
 
-
-    public boolean isNumeric(String input) {
+    private boolean isNumeric(String input) {
         return input.matches("\\d+");
     }
 
-    public boolean isValidIPAddress(String input) {
-        try {
-            InetAddress.getByName(input);
-            return true;
-        } catch (UnknownHostException e) {return false;}
-    }
+    // OF TRY 2
+//    public static HostController getInstance() {
+//        if (instance == null) {
+//            synchronized (lock) {
+//                if (instance == null) {
+//                    instance = new HostController();
+//                    instance.latch.countDown();
+//                }
+//            }
+//        }
+//        return instance;
+//    }
 
     @FXML
     public void hostHandleSubmit(ActionEvent event) {
         try {
             port = Integer.parseInt(hostPort.getText());
             rounds = Integer.parseInt(hostRounds.getText());
-            System.out.println("Host Port: " + port);
-            System.out.println("Rounds: " + rounds);
+            System.out.println();
+            System.out.println("Host's Port: " + port);
+            System.out.println("Number Of Rounds: " + rounds);
             viewModel = new ViewModel(new GameManager(port, rounds));
+            viewModel.numOfClients.set("1");
             Stage stage = (Stage)hostSubmitButton.getScene().getWindow();
             stage.close();
             Stage primaryStage = new Stage();
@@ -82,7 +102,6 @@ public class HostController
             primaryStage.setScene(new Scene(root, 650, 500));
             primaryStage.show();
             HostWaitingController hostWaitingController = fxmlLoader.getController();
-            //hostWaitingController.init();
         } catch (Exception e) {e.printStackTrace();}
     }
 

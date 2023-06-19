@@ -9,6 +9,8 @@ import javafx.scene.paint.Color;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.HashMap;
+
 
 public class BoardDisplayer extends Canvas
 {
@@ -21,7 +23,7 @@ public class BoardDisplayer extends Canvas
     public StringProperty yellowSquare;
     public StringProperty starSquare;
     public StringProperty darkPinkSquare;
-
+    public HashMap<Character, String> lettersMap;
 
     public BoardDisplayer()
     {
@@ -33,6 +35,15 @@ public class BoardDisplayer extends Canvas
         yellowSquare= new SimpleStringProperty();
         starSquare = new SimpleStringProperty();
         darkPinkSquare = new SimpleStringProperty();
+        this.lettersMap = new HashMap<>();
+        loadLetters();
+    }
+
+    private void loadLetters() {
+        for (char letter = 'A'; letter <= 'Z'; letter++) {
+            String path = "C:/Users/ariel/OneDrive/Desktop/RunningTask_1/BookScabbleFacade/src/View/resources/"+String.valueOf(letter)+".jpg";
+            this.lettersMap.put(letter, path);
+        }
     }
 
     public void setRow(int row)
@@ -64,7 +75,7 @@ public class BoardDisplayer extends Canvas
         redraw();
     }
 
-    private void redraw()
+    public void redraw()
     {
         if (boardMat != null)
         {
@@ -123,11 +134,26 @@ public class BoardDisplayer extends Canvas
                     {
                         gc.drawImage(basicPinkBackgroundSquareImg, j * w, i * h, w, h);
                     }
+
+                    else {
+                        Image newImage = new Image(lettersMap.get(boardMat[i][j].charAt(0)));
+                        gc.drawImage(newImage,j * w, i * h, w, h);
+                    }
                 }
             }
             gc.setFill(Color.RED);
             gc.fillRect(col*w, row*h, w, h);
         }
+    }
+
+    public void changePhoto(char letter) {
+
+        GraphicsContext gc = getGraphicsContext2D(); //Get the graphics context for the canvas
+        double w = getWidth() / boardMat[0].length;
+        double h = getHeight() / boardMat.length;
+        gc.clearRect(col*w, row*h, w, h);
+        Image newImage = new Image(lettersMap.get(letter));
+        gc.drawImage(newImage, col*w, row*h, w, h);
     }
 
     public String getBasicPinkBackgroundSquare(){

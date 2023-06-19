@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
@@ -11,25 +12,25 @@
         <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <children>
                 <Label layoutX="23.0" layoutY="104.0" prefHeight="58.0" prefWidth="608.0" text="THE HOST WILL START SOON!" textFill="#a36f6f">
-                    <font>
-                        <Font name="Corbel Light" size="47.0" />
-                    </font>
+                   <font>
+                       <Font name="Corbel Light" size="47.0" />
+                   </font>
                 </Label>
                 <Text fill="#a36f6f" layoutX="103.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number Of Players Connected:" textAlignment="CENTER" wrappingWidth="350.998046875">
                     <font>
                         <Font name="Corbel Light" size="27.0" />
                     </font>
                 </Text>
-                <Text fill="#e80f0f" layoutX="472.0" layoutY="317.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="46.6328125">
+                <TextField fx:id="clientNumOfClients" editable="false" layoutX="431.0" layoutY="231.0" prefHeight="130.0" prefWidth="132.0" style="-fx-background-color: transparent; -fx-text-fill: red;" text="0">
                     <font>
                         <Font name="Corbel Light" size="73.0" />
                     </font>
-                </Text>
-            <Text fill="#a36f6f" layoutX="244.0" layoutY="464.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Get Ready..." textAlignment="CENTER" wrappingWidth="166.998046875">
-               <font>
-                  <Font name="Corbel Light" size="27.0" />
-               </font>
-            </Text>
+                </TextField>
+                 <Text fill="#a36f6f" layoutX="244.0" layoutY="464.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Get Ready..." textAlignment="CENTER" wrappingWidth="166.998046875">
+                    <font>
+                         <Font name="Corbel Light" size="27.0" />
+                    </font>
+                 </Text>
             </children>
         </AnchorPane>
     </center>

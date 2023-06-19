@@ -22,8 +22,12 @@
                   <Font name="Corbel Light" size="25.0" />
                </font>
             </Button>
-            <TextField fx:id="numOfClients" layoutX="430.0" layoutY="279.0" text="0" />
-            <Text fill="#a36f6f" layoutX="33.0" layoutY="298.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number Of Players Connected:" textAlignment="CENTER" wrappingWidth="350.998046875">
+            <TextField fx:id="numOfClients" editable="false" layoutX="418.0" layoutY="211.0" prefHeight="130.0" prefWidth="132.0" style="-fx-background-color: transparent; -fx-text-fill: red;" text="0">
+               <font>
+                  <Font name="Corbel Light" size="73.0" />
+               </font>
+            </TextField>
+            <Text fill="#a36f6f" layoutX="82.0" layoutY="298.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number Of Players Connected:" textAlignment="CENTER" wrappingWidth="350.998046875">
                <font>
                   <Font name="Corbel Light" size="27.0" />
                </font>

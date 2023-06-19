@@ -13,8 +13,8 @@ import java.io.IOException;
 import java.util.Objects;
 
 
-public class HostWaitingController
-{
+public class HostWaitingController {
+
     @FXML
     public Button startGameButton;
     @FXML
@@ -22,11 +22,11 @@ public class HostWaitingController
 
     public HostWaitingController(){
         this.numOfClients = new TextField("0");
-        init();
+        initialize();
     }
 
-    public void init(){
-        HostController.viewModel.numOfClients.bind(numOfClients.textProperty());
+    public void initialize() {
+        numOfClients.textProperty().bindBidirectional(HostController.viewModel.numOfClients);
     }
 
     @FXML
@@ -52,5 +52,4 @@ public class HostWaitingController
     public void handleStartGameButtonReleased(MouseEvent event) {
         startGameButton.setStyle("-fx-background-color: #FFFFFF;");
     }
-
 }

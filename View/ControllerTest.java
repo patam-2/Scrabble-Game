@@ -21,7 +21,7 @@ public class ControllerTest extends Application {
         primaryStage.setScene(new Scene(root, 650, 500));
         primaryStage.show();
 
-        ExecutorService executorService = Executors.newFixedThreadPool(2);
+        ExecutorService executorService = Executors.newFixedThreadPool(4);
 
         // Thread 1: Presses the "Host Player" button
         executorService.submit(() -> {
