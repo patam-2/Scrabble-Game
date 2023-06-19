@@ -2,6 +2,8 @@ package Model;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -11,7 +13,6 @@ import java.util.Scanner;
 public class Client implements Player {
 
     public int id;
-    boolean isConnected = false;
     public Socket socket;
     public InetAddress ip;
     public int port;
@@ -29,21 +30,12 @@ public class Client implements Player {
     {
         try {
             this.socket = new Socket(ip,port);
+            out = null;
+            out = new PrintWriter(socket.getOutputStream());
+            in = new Scanner(socket.getInputStream());
         } catch (IOException e) {
             System.out.println("your code ran into an IOException- In ranClient");
             return;
-        }
-
-        out = null;
-        try {
-            out = new PrintWriter(socket.getOutputStream());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            in = new Scanner(socket.getInputStream());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
 
         out.println("9 0");
@@ -57,63 +49,60 @@ public class Client implements Player {
                 tilesAmount.add(letter);
             }
         }
-        isConnected = true;
 
+        Thread thread = new Thread(receiveMessage);
+        thread.start();
 
-        ///////////// A NEW CHANGE FOR BROADCAST!!!!
-//        Thread thread = new Thread(receiveMessage);
-//        thread.start();
-//
-//        try {
-//            this.socket = new Socket(ip, port);
-//        } catch (IOException e) {throw new RuntimeException(e);}
-//        out = null;
-//        try {
-//            out = new PrintWriter(socket.getOutputStream());
-//            in = new Scanner(socket.getInputStream());
-//
-//        } catch (IOException e) {throw new RuntimeException(e);}
-//        out.println("9 5");
-//        out.flush();
-//        in.close();
-//        out.close();
+      try {
+            this.socket = new Socket(ip, port);
+        } catch (IOException e) {throw new RuntimeException(e);}
+        out = null;
+        try {
+            out = new PrintWriter(socket.getOutputStream());
+            in = new Scanner(socket.getInputStream());
+
+        } catch (IOException e) {throw new RuntimeException(e);}
+        out.println("9 5");
+        out.flush();
+        in.close();
+        out.close();
     }
 
-//    Runnable receiveMessage = ()-> {
-//
-//
-//        while (true) {
-//            try {
-//
-//                DatagramSocket datagramSocket = new DatagramSocket(8000 + id);
-//
-//                // Create a byte array to store incoming data
-//                byte[] buffer = new byte[1024];
-//
-//                // Create a DatagramPacket to receive the incoming data
-//                DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
-//
-//                System.out.println("i got it!");
-//
-//                // Receive the packet
-//                datagramSocket.setSoTimeout(5000);
-//                datagramSocket.receive(packet);
-//
-//                // Extract the received data from the packet
-//                byte[] receivedData = packet.getData();
-//
-//                // Convert the received data to a string
-//                String message = new String(receivedData, 0, packet.getLength());
-//
-//                // Display the received message
-//                System.out.println("Received Message: " + message);
-//
-//                // Close the socket
-//                datagramSocket.close();
-//
-//            } catch (Exception e) {}
-//        }
-//    };
+    Runnable receiveMessage = ()-> {
+        DatagramSocket datagramSocket = null;
+        try {
+            datagramSocket = new DatagramSocket(8000 + id);
+
+            while (true) {
+
+                // Create a byte array to store incoming data
+                byte[] buffer = new byte[1024];
+
+                // Create a DatagramPacket to receive the incoming data
+                DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
+
+                System.out.println("i got it!");
+
+                // Receive the packet
+                datagramSocket.receive(packet);
+
+                // Extract the received data from the packet
+                byte[] receivedData = packet.getData();
+
+                // Convert the received data to a string
+                String message = new String(receivedData, 0, packet.getLength());
+
+                // Display the received message
+                System.out.println("Received Message: " + message);
+            }
+
+        } catch (Exception e) {
+        } finally {
+            // Close the socket
+            datagramSocket.close();
+
+        }
+    };
 
     private void askQuery(String query) {
         try {

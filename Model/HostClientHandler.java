@@ -3,6 +3,9 @@ package Model;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -45,12 +48,11 @@ public class HostClientHandler implements ClientHandler
                 out.println(s);
             }
 
-            ///////////// A NEW CHANGE FOR BROADCAST!!!
-//            if (question == '5')
-//            {
-//                String s = String.valueOf(Host.host.numberOfClients);
-//                broadcast(s);
-//            }
+            ///////////// A NEW CHANGE FOR BROADCAST
+            if (question == '5') {
+                String s = String.valueOf(Host.host.numberOfClients);
+                broadcast(s);
+            }
 
              if (Host.host.turn == id) {
                 if (question == '1') //if we put a word, we take back from the bag the amount of tiles in the word
@@ -121,33 +123,26 @@ public class HostClientHandler implements ClientHandler
         }
     }
 
-//    public void broadcast(String message) {
-//
-//        DatagramSocket datagramSocket = null;
-//        try {
-//            datagramSocket = new DatagramSocket();
-//
-//            for (int i = 0; i < clientsIPlist.size(); i++) {
-//                String clientIP = clientsIPlist.get(i);
-//                //int port = 8000 + i + 2;
-//
-//                InetAddress ip = InetAddress.getByName(clientIP);
-//                DatagramPacket datagramPacket = new DatagramPacket(message.getBytes(), message.getBytes().length, ip, 8000 + i + 2);
-//                datagramSocket.send(datagramPacket);
-//                System.out.println("hi\n");
-//            }
-//        } catch (SocketException e) {
-//            throw new RuntimeException(e);
-//        } catch (UnknownHostException e) {
-//            throw new RuntimeException(e);
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        } finally {
-//            if (datagramSocket != null) {
-//                datagramSocket.close();
-//            }
-//        }
-//    }
+    public void broadcast(String message) {
+
+        DatagramSocket datagramSocket = null;
+        try {
+            datagramSocket = new DatagramSocket();
+
+            for (int i = 0; i < clientsIPlist.size(); i++) {
+                String clientIP = clientsIPlist.get(i);
+                int port = 8000 + i + 2;
+                InetAddress ip = InetAddress.getByName(clientIP);
+                DatagramPacket datagramPacket = new DatagramPacket(message.getBytes(), message.getBytes().length, ip, port);
+                datagramSocket.send(datagramPacket);
+            }
+        } catch (Exception e) {throw new RuntimeException(e);}
+        finally {
+            if (datagramSocket != null) {
+                datagramSocket.close();
+            }
+        }
+    }
 
     @Override
     public void close() {
