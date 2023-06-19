@@ -1,6 +1,7 @@
 package Model;
 
 public class FacadeServer {
+
     public DictionaryManager dictionaryManager;
     public MyServer myServer;
 

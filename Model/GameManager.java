@@ -20,4 +20,3 @@ public class GameManager extends Observable
     public void runGame() {
     }
 }
-

@@ -11,6 +11,7 @@ import java.util.Scanner;
 
 
 public class Host extends Observable implements Player {
+
     public int numberOfClients = 0;
     public Socket hostSocket;
     public int serverPort;
@@ -18,14 +19,16 @@ public class Host extends Observable implements Player {
     public Board board;
     public InetAddress serverIp;
     public MyServer myClientServer;
+    public FacadeServer facadeServer;
     public static Host host = null;
     public HashMap<Integer, ArrayList<Tile>> playerTilesMap;
     public int id;
     public int turn;
-    public int rounds;
+    public int rounds = 0;
 
 
     private Host(InetAddress ip, int serverPort, int hostPort, int rounds) {
+
         this.id = 1;
         this.turn = 1;
         this.rounds = rounds;
@@ -41,6 +44,7 @@ public class Host extends Observable implements Player {
         }
         this.myClientServer = new MyServer(hostPort, new HostClientHandler());
         this.myClientServer.start();
+        //this.facadeServer = new FacadeServer(serverPort);
     }
 
     public static Host getHost(InetAddress ip, int serverPort, int hostPort, int rounds)
@@ -107,10 +111,10 @@ public class Host extends Observable implements Player {
         } catch (IOException e) {throw new RuntimeException(e);}
     }
 
-    public void setNumberOfClients() {
+    public void incrementNumberOfClients() {
         this.numberOfClients++;
         updateAndNotify();
-        System.out.println("Host: " + this.numberOfClients);
+        System.out.println("Host's Number Of Clients: " + this.numberOfClients);
     }
 
     public void updateAndNotify() {

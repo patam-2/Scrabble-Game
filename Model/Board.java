@@ -305,8 +305,8 @@ public class Board
 
                     }
                     else
-                        if (matTile[wordRow - 1][wordCol] != null || matTile[wordRow + 1][wordCol] != null )
-                             return true;
+                    if (matTile[wordRow - 1][wordCol] != null || matTile[wordRow + 1][wordCol] != null )
+                        return true;
 
                 }
             }
@@ -741,40 +741,40 @@ public class Board
 
     public int tryPlaceWord(Word word)
     {
-       boolean t = boardLegal(word);
-       int score = 0;
-       int row = word.getRow();
-       int col = word.getCol();
-       int flag = 0;
+        boolean t = boardLegal(word);
+        int score = 0;
+        int row = word.getRow();
+        int col = word.getCol();
+        int flag = 0;
 
-       if (t)
-       {
-           if (matTile[7][7] == null && dictionaryLegal(word.tiles))
+        if (t)
+        {
+            if (matTile[7][7] == null && dictionaryLegal(word.tiles))
 
-           {
-               for (int i = 0; i < word.tiles.length; i++)
-               {
-                   matTile[row][col] = word.tiles[i];
+            {
+                for (int i = 0; i < word.tiles.length; i++)
+                {
+                    matTile[row][col] = word.tiles[i];
 
-                   if (word.getIsVertical())
+                    if (word.getIsVertical())
                         row++;
 
-                   else
-                       col++;
+                    else
+                        col++;
 
-               }
+                }
 
-               wordsOnBoard.add(word);
-               return 2*getScore(word);
-           }
+                wordsOnBoard.add(word);
+                return 2*getScore(word);
+            }
 
-           else
-           {
-               if (getWords(word) == null)
-                   return score;
+            else
+            {
+                if (getWords(word) == null)
+                    return score;
 
-               int wordsSize = getWords(word).size();
-               int i = 0;
+                int wordsSize = getWords(word).size();
+                int i = 0;
 
                 for (int p = 0; p < wordsSize; p++)
                 {
@@ -805,12 +805,11 @@ public class Board
                         wordsOnBoard.add(tempWord);
                     }
                 }
-               wordsOnBoard.add(word);
-               score += getScore(word);
-           }
-       }
+                wordsOnBoard.add(word);
+                score += getScore(word);
+            }
+        }
 
-       return score;
+        return score;
     }
 }
-

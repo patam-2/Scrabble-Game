@@ -8,42 +8,51 @@ import java.util.Scanner;
 
 public class HostClientHandler implements ClientHandler
 {
-    public PrintWriter out;
-    public Scanner in;
+    private PrintWriter out;
+    private Scanner in;
+    public ArrayList<String> clientsIPlist = new ArrayList<>();
 
     @Override
-    public void handleClient(InputStream inFromclient, OutputStream outToClient)
-    {
-        System.out.println("its ClientHostHandler!");
+    public void handleClient(InputStream inFromclient, OutputStream outToClient) {
+
+        System.out.println("Just Visited HostClientHandler!");
         in = new Scanner(inFromclient);
         out = new PrintWriter(outToClient);
 
-        if (in !=  null && in.hasNext())
-        {
+        if (in !=  null && in.hasNext()) {
+
             String input = in.next();
             int id = Integer.parseInt(input);
             input = in.next();
             char question = input.charAt(0);
 
             if (question == '0') {
-                ArrayList<Tile> tiles = new ArrayList<>();
-                Host.host.setNumberOfClients();
 
-                for (int i = 0; i < 26; i++) {
+                ArrayList<Tile> tiles = new ArrayList<>();
+                String clientIp = "localhost";
+                clientsIPlist.add(clientIp);
+                Host.host.incrementNumberOfClients();
+
+                for (int i = 0; i < 7; i++) {
                     Tile t = Host.host.bag.getRand();
                     tiles.add(t);
                 }
 
                 Host.host.playerTilesMap.put(Host.host.numberOfClients, tiles);
                 String s = String.valueOf(Host.host.numberOfClients);
-                //Host.host.updateAndNotify();
+                System.out.println("Last Stop Is HostClientHandler- Number Of Clients: " + s);
                 System.out.println();
-                System.out.println("The number of clients is: " + s);
                 out.println(s);
             }
 
+            ///////////// A NEW CHANGE FOR BROADCAST!!!
+//            if (question == '5')
+//            {
+//                String s = String.valueOf(Host.host.numberOfClients);
+//                broadcast(s);
+//            }
 
-            if (Host.host.turn == id) {
+             if (Host.host.turn == id) {
                 if (question == '1') //if we put a word, we take back from the bag the amount of tiles in the word
                 {
                     input = input.substring(2);
@@ -92,7 +101,6 @@ public class HostClientHandler implements ClientHandler
                             if (Host.host.getNumberOfRounds() == 0)
                                 Host.host.closeGame();
                         }
-
                         Host.host.updateAndNotify();
                     }
                     else {
@@ -105,12 +113,41 @@ public class HostClientHandler implements ClientHandler
                     String flag = String.valueOf(Host.host.challenge(input.substring(2)));
                     out.println(flag);
                 }
-            } else if (question != '0') {
+            }
+            else if (question != '0') {
                 System.out.println("Sorry it's not your turn.");
             }
             out.flush();
         }
     }
+
+//    public void broadcast(String message) {
+//
+//        DatagramSocket datagramSocket = null;
+//        try {
+//            datagramSocket = new DatagramSocket();
+//
+//            for (int i = 0; i < clientsIPlist.size(); i++) {
+//                String clientIP = clientsIPlist.get(i);
+//                //int port = 8000 + i + 2;
+//
+//                InetAddress ip = InetAddress.getByName(clientIP);
+//                DatagramPacket datagramPacket = new DatagramPacket(message.getBytes(), message.getBytes().length, ip, 8000 + i + 2);
+//                datagramSocket.send(datagramPacket);
+//                System.out.println("hi\n");
+//            }
+//        } catch (SocketException e) {
+//            throw new RuntimeException(e);
+//        } catch (UnknownHostException e) {
+//            throw new RuntimeException(e);
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        } finally {
+//            if (datagramSocket != null) {
+//                datagramSocket.close();
+//            }
+//        }
+//    }
 
     @Override
     public void close() {

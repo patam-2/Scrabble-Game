@@ -45,7 +45,7 @@ public class BookScrabbleHandler implements ClientHandler
     public void close()
     {
         if (in != null)
-             in.close();
+            in.close();
         if (out != null)
             out.close();
     }
