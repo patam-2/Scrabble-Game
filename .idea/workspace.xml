@@ -69,7 +69,7 @@
       <recent name="ViewModel" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.clientThread-1">
+  <component name="RunManager" selected="Application.clientThread-2">
     <configuration name="BoardApplication" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="View.BoardApplication" />
       <module name="BookScabbleFacade" />
@@ -122,6 +122,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ServerThread" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="View.FacadeTest" />
+      <module name="BookScabbleFacade" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="clientThread-1" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="View.ControllerTest" />
       <module name="BookScabbleFacade" />
@@ -157,6 +164,7 @@
       <item itemvalue="Application.clientThread-2" />
       <item itemvalue="Application.clientThread-3" />
       <item itemvalue="Application.hostThread" />
+      <item itemvalue="Application.ServerThread" />
       <item itemvalue="Application.GameManagerTest" />
       <item itemvalue="Application.MenuApplication" />
     </list>
@@ -181,47 +189,24 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/Model/HostClientHandler.java</url>
-          <line>15</line>
-          <properties class="Model.HostClientHandler" method="handleClient">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="27" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/View/ClientController.java</url>
-          <line>34</line>
-          <properties class="View.ClientController" method="&lt;init&gt;">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="31" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/View/ClientController.java</url>
-          <line>72</line>
-          <properties class="View.ClientController" method="clientHandleSubmitPressed">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="35" />
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Model/Board.java</url>
+          <line>151</line>
+          <option name="timeStamp" value="87" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Model/Client.java</url>
-          <line>28</line>
-          <option name="timeStamp" value="34" />
+          <line>32</line>
+          <option name="timeStamp" value="100" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/View/ClientController.java</url>
-          <line>87</line>
-          <option name="timeStamp" value="36" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Model/Client.java</url>
-          <line>119</line>
-          <option name="timeStamp" value="37" />
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/Model/Host.java</url>
+          <line>132</line>
+          <properties class="Model.Host" method="broadcast">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="89" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -246,6 +231,6 @@
     <SUITE FILE_PATH="coverage/BookScabbleFacade$MenuApplication.ic" NAME="MenuApplication Coverage Results" MODIFIED="1686249121422" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>View.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/BookScabbleFacade$hostThread.ic" NAME="hostThread Coverage Results" MODIFIED="1686854950711" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/BookScabbleFacade$hostThread.ic" NAME="hostThread Coverage Results" MODIFIED="1687373154425" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
