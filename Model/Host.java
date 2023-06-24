@@ -2,6 +2,8 @@ package Model;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -25,6 +27,9 @@ public class Host extends Observable implements Player {
     public int id;
     public int turn;
     public int rounds = 0;
+    public ArrayList<String> clientsIPlist;
+
+
 
 
     private Host(InetAddress ip, int serverPort, int hostPort, int rounds) {
@@ -44,7 +49,7 @@ public class Host extends Observable implements Player {
         }
         this.myClientServer = new MyServer(hostPort, new HostClientHandler());
         this.myClientServer.start();
-        //this.facadeServer = new FacadeServer(serverPort);
+        this.clientsIPlist = new ArrayList<>();
     }
 
     public static Host getHost(InetAddress ip, int serverPort, int hostPort, int rounds)
@@ -77,7 +82,9 @@ public class Host extends Observable implements Player {
                 this.playerTilesMap.get(id).add(t);
             }
             this.turn = 1 + (this.turn % this.numberOfClients);
-            //updateAndNotify();
+            System.out.println(this.turn);
+            broadcast("t");
+            broadcast(word.toString());
         }
         return score;
     }
@@ -120,5 +127,28 @@ public class Host extends Observable implements Player {
     public void updateAndNotify() {
         setChanged();
         notifyObservers();
+    }
+
+
+    public void broadcast(String message) {
+
+        DatagramSocket datagramSocket = null;
+        try {
+            datagramSocket = new DatagramSocket();
+
+            for (int i = 0; i < clientsIPlist.size(); i++) {
+                String clientIP = clientsIPlist.get(i);
+                int port = 8000 + i + 2;
+                InetAddress ip = InetAddress.getByName(clientIP);
+                DatagramPacket datagramPacket = new DatagramPacket(message.getBytes(), message.getBytes().length, ip, port);
+                datagramSocket.send(datagramPacket);
+
+            }
+        } catch (Exception e) {throw new RuntimeException(e);}
+        finally {
+            if (datagramSocket != null) {
+                datagramSocket.close();
+            }
+        }
     }
 }

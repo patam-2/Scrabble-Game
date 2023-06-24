@@ -747,13 +747,11 @@ public class Board
         int col = word.getCol();
         int flag = 0;
 
-        if (t)
-        {
-            if (matTile[7][7] == null && dictionaryLegal(word.tiles))
+        if (t) {
 
-            {
-                for (int i = 0; i < word.tiles.length; i++)
-                {
+            if (matTile[7][7] == null && dictionaryLegal(word.tiles)) {
+
+                for (int i = 0; i < word.tiles.length; i++) {
                     matTile[row][col] = word.tiles[i];
 
                     if (word.getIsVertical())
@@ -761,7 +759,6 @@ public class Board
 
                     else
                         col++;
-
                 }
 
                 wordsOnBoard.add(word);

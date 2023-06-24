@@ -3,9 +3,6 @@ package Model;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -13,7 +10,6 @@ public class HostClientHandler implements ClientHandler
 {
     private PrintWriter out;
     private Scanner in;
-    public ArrayList<String> clientsIPlist = new ArrayList<>();
 
     @Override
     public void handleClient(InputStream inFromclient, OutputStream outToClient) {
@@ -33,7 +29,7 @@ public class HostClientHandler implements ClientHandler
 
                 ArrayList<Tile> tiles = new ArrayList<>();
                 String clientIp = "localhost";
-                clientsIPlist.add(clientIp);
+                Host.host.clientsIPlist.add(clientIp);
                 Host.host.incrementNumberOfClients();
 
                 for (int i = 0; i < 7; i++) {
@@ -51,10 +47,11 @@ public class HostClientHandler implements ClientHandler
             ///////////// A NEW CHANGE FOR BROADCAST
             if (question == '5') {
                 String s = String.valueOf(Host.host.numberOfClients);
-                broadcast(s);
+
+                Host.host.broadcast(s);
             }
 
-             if (Host.host.turn == id) {
+             else if (Host.host.turn == id) {
                 if (question == '1') //if we put a word, we take back from the bag the amount of tiles in the word
                 {
                     input = input.substring(2);
@@ -97,6 +94,7 @@ public class HostClientHandler implements ClientHandler
                             Host.host.playerTilesMap.get(id).add(t);
                         }
                         Host.host.turn = 1 + (Host.host.turn % Host.host.numberOfClients);
+                        Host.host.broadcast("t");
 
                         if (id == Host.host.numberOfClients) {
                             Host.host.setNumberOfRounds(Host.host.getNumberOfRounds() - 1);
@@ -123,26 +121,6 @@ public class HostClientHandler implements ClientHandler
         }
     }
 
-    public void broadcast(String message) {
-
-        DatagramSocket datagramSocket = null;
-        try {
-            datagramSocket = new DatagramSocket();
-
-            for (int i = 0; i < clientsIPlist.size(); i++) {
-                String clientIP = clientsIPlist.get(i);
-                int port = 8000 + i + 2;
-                InetAddress ip = InetAddress.getByName(clientIP);
-                DatagramPacket datagramPacket = new DatagramPacket(message.getBytes(), message.getBytes().length, ip, port);
-                datagramSocket.send(datagramPacket);
-            }
-        } catch (Exception e) {throw new RuntimeException(e);}
-        finally {
-            if (datagramSocket != null) {
-                datagramSocket.close();
-            }
-        }
-    }
 
     @Override
     public void close() {

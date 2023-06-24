@@ -7,10 +7,11 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Observable;
 import java.util.Scanner;
 
 
-public class Client implements Player {
+public class Client extends Observable implements Player {
 
     public int id;
     public Socket socket;
@@ -50,12 +51,16 @@ public class Client implements Player {
             }
         }
 
+        try {
+            this.socket.close();
+        } catch (IOException e) {throw new RuntimeException(e);}
+
         Thread thread = new Thread(receiveMessage);
         thread.start();
 
       try {
             this.socket = new Socket(ip, port);
-        } catch (IOException e) {throw new RuntimeException(e);}
+      } catch (IOException e) {throw new RuntimeException(e);}
         out = null;
         try {
             out = new PrintWriter(socket.getOutputStream());
@@ -81,8 +86,6 @@ public class Client implements Player {
                 // Create a DatagramPacket to receive the incoming data
                 DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
 
-                System.out.println("i got it!");
-
                 // Receive the packet
                 datagramSocket.receive(packet);
 
@@ -92,17 +95,35 @@ public class Client implements Player {
                 // Convert the received data to a string
                 String message = new String(receivedData, 0, packet.getLength());
 
+                if (message.equals("S")){ // s for game started
+                    setChanged();
+                    notifyObservers("s");
+                }
+                else if (message.equals("t")) { // t for turn
+                    setChanged();
+                    notifyObservers(message);
+                }
+                else if (isNumeric(message)) {
+                    setChanged();
+                    notifyObservers("p"); // p for player
+                }
+                else // a word
+                {
+                    setChanged();
+                    notifyObservers(message);
+                }
+
+
                 // Display the received message
                 System.out.println("Received Message: " + message);
             }
-
-        } catch (Exception e) {
-        } finally {
-            // Close the socket
-            datagramSocket.close();
-
-        }
+        } catch (Exception e) {}
+        //datagramSocket.close();
     };
+
+    private boolean isNumeric(String input) {
+        return input.matches("\\d+");
+    }
 
     private void askQuery(String query) {
         try {
