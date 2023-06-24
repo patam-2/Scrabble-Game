@@ -1,16 +1,16 @@
 package testCode;
 
 import Model.*;
-
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Scanner;
 
-public class GameManagerTest
-{
-    public static void main(String[] args)
-    {
-        int serverPort = 8888;
+
+public class GameManagerTest {
+
+    public static void main(String[] args) {
+
+        int serverPort = 1234;
         int hostPort = 5678;
         int rounds = 2;
 
