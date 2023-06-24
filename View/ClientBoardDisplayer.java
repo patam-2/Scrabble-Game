@@ -11,7 +11,7 @@ import java.io.FileNotFoundException;
 import java.util.HashMap;
 
 
-public class BoardDisplayer extends Canvas
+public class ClientBoardDisplayer extends Canvas
 {
     public int col;
     public int row;
@@ -24,7 +24,7 @@ public class BoardDisplayer extends Canvas
     public StringProperty darkPinkSquare;
     public HashMap<Character, String> lettersMap;
 
-    public BoardDisplayer()
+    public ClientBoardDisplayer()
     {
         this.col = 7;
         this.row = 7;

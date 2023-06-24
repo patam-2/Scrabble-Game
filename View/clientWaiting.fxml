@@ -31,6 +31,7 @@
                          <Font name="Corbel Light" size="27.0" />
                     </font>
                  </Text>
+            <TextField fx:id="hasGameBinded" layoutX="253.0" layoutY="497.0" />
             </children>
         </AnchorPane>
     </center>

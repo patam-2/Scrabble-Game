@@ -15,7 +15,7 @@
          <children>
             <AnchorPane prefHeight="551.0" prefWidth="662.0">
                <children>
-                  <Label layoutX="143.0" layoutY="204.0" prefHeight="42.0" prefWidth="48.0" text="IP:" textAlignment="CENTER" textFill="#a36f6f">
+                  <Label layoutX="143.0" layoutY="236.0" prefHeight="42.0" prefWidth="48.0" text="IP:" textAlignment="CENTER" textFill="#a36f6f">
                      <font>
                         <Font name="Corbel Light" size="24.0" />
                      </font>
@@ -28,7 +28,7 @@
                         <Font name="Corbel Light" size="24.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="clientIP" layoutX="249.0" layoutY="210.0" prefHeight="26.0" prefWidth="254.0" />
+                  <TextField fx:id="clientIP" layoutX="250.0" layoutY="244.0" prefHeight="26.0" prefWidth="254.0" />
                   <TextField fx:id="clientPort" layoutX="247.0" layoutY="314.0" prefHeight="26.0" prefWidth="259.0" />
                   <Label layoutX="220.0" layoutY="68.0" text="CLIENT LOGIN:" textFill="#a36f6f">
                      <font>
@@ -45,6 +45,15 @@
                      <Font name="Corbel Light" size="17.0" />
                   </font>
                   </Button>
+                  <Label layoutX="113.0" layoutY="167.0" prefHeight="42.0" prefWidth="77.0" text="NAME:" textAlignment="CENTER" textFill="#a36f6f">
+                     <font>
+                        <Font name="Corbel Light" size="24.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </Label>
+                  <TextField fx:id="clientName" layoutX="250.0" layoutY="175.0" prefHeight="26.0" prefWidth="254.0" />
                </children>
             </AnchorPane>
          </children>

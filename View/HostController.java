@@ -12,7 +12,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
@@ -33,17 +32,10 @@ public class HostController implements Initializable {
     public int port;
     public static ViewModel viewModel;
 
-    // OF TRY 2
-    //private static final Object lock = new Object();
-    //private static HostController instance;
-    //public CountDownLatch latch;
-
     public HostController() {
         this.hostPort = new TextField("0000");
         this.hostRounds = new TextField("0");
         viewModel = null;
-        // OF TRY 2
-        //latch = new CountDownLatch(1);
     }
 
     @Override
@@ -69,19 +61,6 @@ public class HostController implements Initializable {
     private boolean isNumeric(String input) {
         return input.matches("\\d+");
     }
-
-    // OF TRY 2
-//    public static HostController getInstance() {
-//        if (instance == null) {
-//            synchronized (lock) {
-//                if (instance == null) {
-//                    instance = new HostController();
-//                    instance.latch.countDown();
-//                }
-//            }
-//        }
-//        return instance;
-//    }
 
     @FXML
     public void hostHandleSubmit(ActionEvent event) {

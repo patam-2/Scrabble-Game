@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -16,14 +17,25 @@ public class ControllerTest extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("menu.fxml"));
         Parent root = loader.load();
         MenuController menuController = loader.getController();
+        //FacadeServer facadeServer = new FacadeServer(1234);
 
         primaryStage.setTitle("Scrabble Game Menu");
         primaryStage.setScene(new Scene(root, 650, 500));
         primaryStage.show();
 
         ExecutorService executorService = Executors.newFixedThreadPool(4);
+//
+//        // Thread 1: Opens the facade server
+//        executorService.execute(() -> {
+//            try {
+//                Thread.sleep(1000); // Sleep for 1 second before pressing the button
+//                Platform.runLater(() -> facadeServer.myServer.start());
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        });
 
-        // Thread 1: Presses the "Host Player" button
+        // Thread 2: Presses the "Host Player" button
         executorService.submit(() -> {
             try {
                 Thread.sleep(1000); // Sleep for 1 second before pressing the button

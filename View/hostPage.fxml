@@ -11,7 +11,7 @@
    <center>
       <AnchorPane prefHeight="515.0" prefWidth="549.0" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="136.0" layoutY="199.0" text="MY PORT: " textFill="#a36f6f">
+            <Label layoutX="136.0" layoutY="185.0" text="MY PORT: " textFill="#a36f6f">
                <font>
                   <Font name="Corbel Light" size="24.0" />
                </font>
@@ -21,8 +21,8 @@
                   <Font name="Corbel Light" size="24.0" />
                </font>
             </Label>
-            <TextField fx:id="hostPort" layoutX="321.0" layoutY="200.0" prefHeight="26.0" prefWidth="184.0" />
-            <TextField fx:id="hostRounds" layoutX="354.0" layoutY="310.0" prefHeight="26.0"  prefWidth="150.0" />
+            <TextField fx:id="hostPort" layoutX="321.0" layoutY="186.0" prefHeight="26.0" prefWidth="184.0" />
+            <TextField fx:id="hostRounds" layoutX="354.0" layoutY="310.0" prefHeight="26.0" prefWidth="150.0" />
             <Label layoutX="219.0" layoutY="56.0" text="HOST LOGIN:" textAlignment="CENTER" textFill="#a36f6f">
                <font>
                   <Font name="Corbel Light" size="36.0" />
@@ -38,6 +38,12 @@
                <Font name="Corbel Light" size="17.0" />
             </font>
          </Button>
+            <TextField fx:id="hostPort1" layoutX="321.0" layoutY="248.0" prefHeight="26.0" prefWidth="184.0" />
+            <Label layoutX="154.0" layoutY="246.0" text="NAME:" textFill="#a36f6f">
+               <font>
+                  <Font name="Corbel Light" size="24.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </center>

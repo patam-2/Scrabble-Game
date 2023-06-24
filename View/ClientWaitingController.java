@@ -1,6 +1,7 @@
 package View;
 
 import Model.Client;
+import ViewModel.ClientViewModel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,43 +14,40 @@ import java.util.Objects;
 
 public class ClientWaitingController {
 
-    public static Stage clientWaitingStage;
-
+    public static ClientViewModel clientViewModel;
+    public Client client;
     @FXML
     public TextField clientNumOfClients;
-
-    // OF TRY 1
-    //private HostController hostController = HostController.getInstance();
+    @FXML
+    public TextField hasGameBinded;
 
     public ClientWaitingController() {
+
+        this.hasGameBinded = new TextField("0");
+        hasGameBinded.textProperty().addListener((o, ov, nv)->{
+            System.out.println("has started: " + hasGameBinded.getText());
+            if (hasGameBinded.getText() != null)
+                handleClientStartGame();
+        });
         this.clientNumOfClients = new TextField("0");
-        clientWaitingStage = new Stage();
-        Client client = new Client(ClientController.port, ClientController.ip);
+        clientViewModel = new ClientViewModel(ClientController.port, ClientController.ip);
         initialize();
     }
 
     public void initialize() {
-
-        // WHEN SHOWING TZVIKA
-        //clientNumOfClients.textProperty().bindBidirectional(HostController.viewModel.numOfClients);
-
-        // TRY 1
-        //clientNumOfClients.textProperty().bindBidirectional(hostController.viewModel.numOfClients);
-
-        // TRY 2
-        // ViewModel viewModel = HostController.getInstance().viewModel;
-        // clientNumOfClients.textProperty().bindBidirectional(viewModel.numOfClients);
+        clientNumOfClients.textProperty().bindBidirectional(clientViewModel.clientNumOfClients);
+        hasGameBinded.textProperty().bindBidirectional(clientViewModel.hasGameStarted);
     }
 
-
-
     @FXML
-    public static void handleClientStartGame() {
+    public void handleClientStartGame() {
+        System.out.println("has started 2: " + hasGameBinded.getText());
         try {
-            Stage stage = (Stage)clientWaitingStage.getScene().getWindow();
+            System.out.println(clientNumOfClients.getText());
+            Stage stage = (Stage) clientNumOfClients.getScene().getWindow();
             stage.close();
             Stage primaryStage = new Stage();
-            Parent root = FXMLLoader.load(Objects.requireNonNull(ClientController.class.getResource("board.fxml")));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(ClientController.class.getResource("ClientBoard.fxml")));
             primaryStage.setTitle("Scrabble Game Board");
             primaryStage.setScene(new Scene(root, 650, 500));
             primaryStage.show();

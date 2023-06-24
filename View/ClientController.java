@@ -26,13 +26,17 @@ public class ClientController implements Initializable {
     @FXML
     public TextField clientPort;
     @FXML
+    public TextField clientName;
+    @FXML
     public Button clientSubmitButton;
     @FXML
     public Button clientReturnButton;
     public static InetAddress ip;
     public static int port;
+    public static String theClientName;
 
     public ClientController() {
+        this.clientName = new TextField("");
         this.clientPort = new TextField("0000");
         this.clientIP = new TextField("0.0.0.0");
     }
@@ -43,6 +47,14 @@ public class ClientController implements Initializable {
         clientSubmitButton.setDisable(true);                                                   // Disable the submit button initially
         clientPort.textProperty().addListener((observable, oldValue, newValue) -> {            // Add a listener to both text fields' textProperty
             if (!isNumeric(clientPort.getText()) || !isValidIPAddress(clientIP.getText())) {   // Check if either text field contains letters or is not a valid number
+                clientSubmitButton.setDisable(true);
+            } else {
+                clientSubmitButton.setDisable(false);
+            }
+        });
+
+        clientName.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.trim().isEmpty() || !newValue.matches("^[a-zA-Z]+$")) {
                 clientSubmitButton.setDisable(true);
             } else {
                 clientSubmitButton.setDisable(false);
@@ -75,23 +87,17 @@ public class ClientController implements Initializable {
         try {
             ip = InetAddress.getByName(clientIP.getText());
             port = Integer.parseInt(clientPort.getText());
+            theClientName = String.valueOf(clientName.getText());
             System.out.println("Client'S Ip: " + ip);
             System.out.println("Client'S Port: " + port);
+            System.out.println("Client's Name: " + theClientName);
             Stage stage = (Stage)clientSubmitButton.getScene().getWindow();
             stage.close();
-
-            // OF TRY 2
-            //HostController.getInstance().latch.await();
-
             Stage primaryStage = new Stage();
             FXMLLoader fxmlLoader = new FXMLLoader();
             Parent root = fxmlLoader.load(Objects.requireNonNull(getClass().getResource("clientWaiting.fxml")));
             primaryStage.setScene(new Scene(root, 650, 500));
             primaryStage.show();
-
-            ///////////// NOT SURE IF NEEDED ASK TZVIKA!!
-           // ClientWaitingController ClientWaitingController = fxmlLoader.getController();
-
         } catch (Exception e) {e.printStackTrace();}
     }
 

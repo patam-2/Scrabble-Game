@@ -40,6 +40,7 @@ public class HostWaitingController {
             primaryStage.setTitle("Scrabble Game Board");
             primaryStage.setScene(new Scene(root, 650, 500));
             primaryStage.show();
+            HostController.viewModel.broadcast("S");
         } catch (IOException e) {throw new RuntimeException(e);}
     }
 

@@ -1,22 +1,24 @@
+
 package View;
 
-import Model.Host;
-import Model.Tile;
-import Model.Word;
-import javafx.application.Platform;
-import javafx.event.EventHandler;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
+        import Model.Host;
+        import Model.Tile;
+        import Model.Word;
+        import javafx.application.Platform;
+        import javafx.event.EventHandler;
+        import javafx.fxml.FXML;
+        import javafx.scene.control.Button;
+        import javafx.scene.control.TextField;
+        import javafx.scene.control.ToggleButton;
+        import javafx.scene.input.KeyCode;
+        import javafx.scene.input.KeyEvent;
+        import javafx.scene.input.MouseEvent;
 
-import java.util.HashMap;
+        import java.util.HashMap;
 
 
-public class BoardController {
+public class ClientBoardController {
+
 
     @FXML
     private Button letter1button;
@@ -70,45 +72,47 @@ public class BoardController {
     public int firstCol;
 
     String[][] boardData = new String[][]{
-                                            {"3W", "0", "0", "2L", "0", "0", "0", "3W", "0", "0", "0", "2L", "0", "0", "3W"},
-                                            {"0", "2W", "0", "0", "0", "3L", "0", "0", "0", "3L", "0", "0", "0", "2W", "0"},
-                                            {"0", "0", "2W", "0", "0", "0", "2L", "0", "2L", "0", "0", "0", "2W", "0", "0"},
-                                            {"2L", "0", "0", "2W", "0", "0", "0", "2L", "0", "0", "0", "2W", "0", "0", "2L"},
-                                            {"0", "0", "0", "0", "2W", "0", "0", "0", "0", "0", "2W", "0", "0", "0", "0"},
-                                            {"0", "3L", "0", "0", "0", "3L", "0", "0", "0", "3L", "0", "0", "0", "3L", "0"},
-                                            {"0", "0", "2L", "0", "0", "0", "2L", "0", "2L", "0", "0", "0", "2L", "0", "0"},
-                                            {"3W", "0", "0", "2L", "0", "0", "0", "2WS", "0", "0", "0", "2L", "0", "0", "3W"},
-                                            {"0", "0", "2L", "0", "0", "0", "2L", "0", "2L", "0", "0", "0", "2L", "0", "0"},
-                                            {"0", "3L", "0", "0", "0", "3L", "0", "0", "0", "3L", "0", "0", "0", "3L", "0"},
-                                            {"0", "0", "0", "0", "2W", "0", "0", "0", "0", "0", "2W", "0", "0", "0", "0"},
-                                            {"2L", "0", "0", "2W", "0", "0", "0", "2L", "0", "0", "0", "2W", "0", "0", "2L"},
-                                            {"0", "0", "2W", "0", "0", "0", "2L", "0", "2L", "0", "0", "0", "2W", "0", "0"},
-                                            {"0", "2W", "0", "0", "0", "3L", "0", "0", "0", "3L", "0", "0", "0", "2W", "0"},
-                                            {"3W", "0", "0", "2L", "0", "0", "0", "3W", "0", "0", "0", "2L", "0", "0", "3W"},};
+            {"3W", "0", "0", "2L", "0", "0", "0", "3W", "0", "0", "0", "2L", "0", "0", "3W"},
+            {"0", "2W", "0", "0", "0", "3L", "0", "0", "0", "3L", "0", "0", "0", "2W", "0"},
+            {"0", "0", "2W", "0", "0", "0", "2L", "0", "2L", "0", "0", "0", "2W", "0", "0"},
+            {"2L", "0", "0", "2W", "0", "0", "0", "2L", "0", "0", "0", "2W", "0", "0", "2L"},
+            {"0", "0", "0", "0", "2W", "0", "0", "0", "0", "0", "2W", "0", "0", "0", "0"},
+            {"0", "3L", "0", "0", "0", "3L", "0", "0", "0", "3L", "0", "0", "0", "3L", "0"},
+            {"0", "0", "2L", "0", "0", "0", "2L", "0", "2L", "0", "0", "0", "2L", "0", "0"},
+            {"3W", "0", "0", "2L", "0", "0", "0", "2WS", "0", "0", "0", "2L", "0", "0", "3W"},
+            {"0", "0", "2L", "0", "0", "0", "2L", "0", "2L", "0", "0", "0", "2L", "0", "0"},
+            {"0", "3L", "0", "0", "0", "3L", "0", "0", "0", "3L", "0", "0", "0", "3L", "0"},
+            {"0", "0", "0", "0", "2W", "0", "0", "0", "0", "0", "2W", "0", "0", "0", "0"},
+            {"2L", "0", "0", "2W", "0", "0", "0", "2L", "0", "0", "0", "2W", "0", "0", "2L"},
+            {"0", "0", "2W", "0", "0", "0", "2L", "0", "2L", "0", "0", "0", "2W", "0", "0"},
+            {"0", "2W", "0", "0", "0", "3L", "0", "0", "0", "3L", "0", "0", "0", "2W", "0"},
+            {"3W", "0", "0", "2L", "0", "0", "0", "3W", "0", "0", "0", "2L", "0", "0", "3W"},};
 
 
     String[][] cloneBoard = new String[][]{
-                                            {"3W", "0", "0", "2L", "0", "0", "0", "3W", "0", "0", "0", "2L", "0", "0", "3W"},
-                                            {"0", "2W", "0", "0", "0", "3L", "0", "0", "0", "3L", "0", "0", "0", "2W", "0"},
-                                            {"0", "0", "2W", "0", "0", "0", "2L", "0", "2L", "0", "0", "0", "2W", "0", "0"},
-                                            {"2L", "0", "0", "2W", "0", "0", "0", "2L", "0", "0", "0", "2W", "0", "0", "2L"},
-                                            {"0", "0", "0", "0", "2W", "0", "0", "0", "0", "0", "2W", "0", "0", "0", "0"},
-                                            {"0", "3L", "0", "0", "0", "3L", "0", "0", "0", "3L", "0", "0", "0", "3L", "0"},
-                                            {"0", "0", "2L", "0", "0", "0", "2L", "0", "2L", "0", "0", "0", "2L", "0", "0"},
-                                            {"3W", "0", "0", "2L", "0", "0", "0", "2WS", "0", "0", "0", "2L", "0", "0", "3W"},
-                                            {"0", "0", "2L", "0", "0", "0", "2L", "0", "2L", "0", "0", "0", "2L", "0", "0"},
-                                            {"0", "3L", "0", "0", "0", "3L", "0", "0", "0", "3L", "0", "0", "0", "3L", "0"},
-                                            {"0", "0", "0", "0", "2W", "0", "0", "0", "0", "0", "2W", "0", "0", "0", "0"},
-                                            {"2L", "0", "0", "2W", "0", "0", "0", "2L", "0", "0", "0", "2W", "0", "0", "2L"},
-                                            {"0", "0", "2W", "0", "0", "0", "2L", "0", "2L", "0", "0", "0", "2W", "0", "0"},
-                                            {"0", "2W", "0", "0", "0", "3L", "0", "0", "0", "3L", "0", "0", "0", "2W", "0"},
-                                            {"3W", "0", "0", "2L", "0", "0", "0", "3W", "0", "0", "0", "2L", "0", "0", "3W"},};
+            {"3W", "0", "0", "2L", "0", "0", "0", "3W", "0", "0", "0", "2L", "0", "0", "3W"},
+            {"0", "2W", "0", "0", "0", "3L", "0", "0", "0", "3L", "0", "0", "0", "2W", "0"},
+            {"0", "0", "2W", "0", "0", "0", "2L", "0", "2L", "0", "0", "0", "2W", "0", "0"},
+            {"2L", "0", "0", "2W", "0", "0", "0", "2L", "0", "0", "0", "2W", "0", "0", "2L"},
+            {"0", "0", "0", "0", "2W", "0", "0", "0", "0", "0", "2W", "0", "0", "0", "0"},
+            {"0", "3L", "0", "0", "0", "3L", "0", "0", "0", "3L", "0", "0", "0", "3L", "0"},
+            {"0", "0", "2L", "0", "0", "0", "2L", "0", "2L", "0", "0", "0", "2L", "0", "0"},
+            {"3W", "0", "0", "2L", "0", "0", "0", "2WS", "0", "0", "0", "2L", "0", "0", "3W"},
+            {"0", "0", "2L", "0", "0", "0", "2L", "0", "2L", "0", "0", "0", "2L", "0", "0"},
+            {"0", "3L", "0", "0", "0", "3L", "0", "0", "0", "3L", "0", "0", "0", "3L", "0"},
+            {"0", "0", "0", "0", "2W", "0", "0", "0", "0", "0", "2W", "0", "0", "0", "0"},
+            {"2L", "0", "0", "2W", "0", "0", "0", "2L", "0", "0", "0", "2W", "0", "0", "2L"},
+            {"0", "0", "2W", "0", "0", "0", "2L", "0", "2L", "0", "0", "0", "2W", "0", "0"},
+            {"0", "2W", "0", "0", "0", "3L", "0", "0", "0", "3L", "0", "0", "0", "2W", "0"},
+            {"3W", "0", "0", "2L", "0", "0", "0", "3W", "0", "0", "0", "2L", "0", "0", "3W"},};
 
 
     @FXML
-    private void handleQueryButtonPressed(MouseEvent  event) {
+    private void handleQueryButtonPressed(MouseEvent event) {
         queryButton.setStyle("-fx-background-color: #E6B0AA;");
     }
+
+
 
 
     @FXML
@@ -171,7 +175,6 @@ public class BoardController {
         setLetters();
         loadLetters();
         boardDisplayer.setBoardMat(boardData);
-        
         boardDisplayer.addEventFilter(MouseEvent.MOUSE_CLICKED, (e)->boardDisplayer.requestFocus());
         boardDisplayer.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
@@ -377,7 +380,6 @@ public class BoardController {
             letter6button.setDisable(false);
             letter7button.setDisable(false);
             queryButton.setDisable(false);
-            challengeButton.setDisable(false);
             numOfIsVerticalIsPressed = 1;
             isVertical.setStyle("-fx-background-color: #F2D7D5;");
             isVertical.setDisable(false);
@@ -391,11 +393,11 @@ public class BoardController {
 
             Tile[] tiles = new Tile[myWord.getText().length()];
             for (int i = 0; i < myWord.getText().length(); i++) {
-              for (int j = 0; j < Host.host.playerTilesMap.get(1).size(); j++)
-              {
-                  if (Host.host.playerTilesMap.get(1).get(j).letter == myWord.getText().charAt(i))
-                      tiles[i] = Host.host.playerTilesMap.get(1).get(j);
-              }
+                for (int j = 0; j < Host.host.playerTilesMap.get(1).size(); j++)
+                {
+                    if (Host.host.playerTilesMap.get(1).get(j).letter == myWord.getText().charAt(i))
+                        tiles[i] = Host.host.playerTilesMap.get(1).get(j);
+                }
             }
 
             boolean isVer = isVertical.isSelected();
@@ -411,13 +413,6 @@ public class BoardController {
             }
             queryButton.setDisable(true);
             challengeButton.setDisable(true);
-            letter1button.setDisable(true);
-            letter2button.setDisable(true);
-            letter3button.setDisable(true);
-            letter4button.setDisable(true);
-            letter5button.setDisable(true);
-            letter6button.setDisable(true);
-            letter7button.setDisable(true);
             setLetters();
         });
 
@@ -453,13 +448,6 @@ public class BoardController {
             }
             queryButton.setDisable(true);
             challengeButton.setDisable(true);
-            letter1button.setDisable(true);
-            letter2button.setDisable(true);
-            letter3button.setDisable(true);
-            letter4button.setDisable(true);
-            letter5button.setDisable(true);
-            letter6button.setDisable(true);
-            letter7button.setDisable(true);
             setLetters();
         });
     }
