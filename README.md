@@ -63,3 +63,6 @@ A legal word must meet all the following conditions:
     •	Does not produce other illegal words on the board.
     
 Thank you for reading:)
+
+Now, here's a video of our project! In order to whatch it, please click on the link below:)
+https://365openu-my.sharepoint.com/:v:/g/personal/maomer54_365_openu_ac_il/EZ1P2zQAMvRNijGKb39JjLEBCnI48g-sxpRes-A_TrYJhw?e=hK7T0R
